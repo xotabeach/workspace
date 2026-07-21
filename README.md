@@ -1,0 +1,89 @@
+# Crimea Travel Platform
+
+Crimea Travel Platform — greenfield-платформа для поиска туристических мест и
+планирования маршрутов. Первый контентный контур посвящён Республике Крым, но
+доменная модель поддерживает несколько стран и регионов:
+`Country -> Region -> Locality -> Place`.
+
+Проект не является официальным государственным приложением и не заявляет об
+официальном партнёрстве с государственными организациями.
+
+## Статус
+
+Проект находится на стадии architecture and foundation. Полноценные backend,
+Flutter application и production infrastructure ещё не реализованы.
+
+## Архитектура repositories
+
+Этот repository является Git superproject и фиксирует совместимые commits
+компонентов через submodules:
+
+```text
+crimea-travel-platform/
+├── tourism-platform/
+├── tourism-mobile/
+├── tourism-backend/
+├── tourism-infrastructure/
+└── tourism-documentation/
+```
+
+| Repository | Назначение | Статус |
+| --- | --- | --- |
+| [`tourism-platform`](tourism-platform) | Архитектура, local Compose и tooling | Foundation |
+| `tourism-mobile` | Flutter application для Android и iOS | Planned |
+| `tourism-backend` | Python/FastAPI modular monolith | Planned |
+| `tourism-infrastructure` | Kubernetes, Helm и environments | Planned |
+| `tourism-documentation` | Расширенная документация | Planned |
+
+Планируемые backend boundaries: `identity`, `users`, `geography`, `places`,
+`routes`, `route_builder` и `media`. Они начинаются как modules одного backend
+и выделяются в микросервисы только при подтверждённой необходимости.
+
+## Технологическое направление
+
+- Flutter, Riverpod, GoRouter, Dio и offline-first foundation.
+- Python 3.13, FastAPI, Pydantic v2 и SQLAlchemy 2.
+- PostgreSQL с PostGIS, Redis и S3-compatible storage.
+- Provider-neutral `RoutingProvider`.
+- Docker Compose локально; Kubernetes и Helm в infrastructure repository.
+
+## Начало работы
+
+Клонирование со всеми доступными submodules:
+
+```bash
+git clone --recurse-submodules \
+  https://github.com/crimea-travel-platform/crimea-travel-platform.git
+cd crimea-travel-platform
+make init
+```
+
+Обновление submodule pointers:
+
+```bash
+make update
+```
+
+Запуск local infrastructure:
+
+```bash
+make up
+```
+
+## Документация
+
+- [Product vision](tourism-platform/docs/product-vision.md)
+- [System context](tourism-platform/docs/system-context.md)
+- [Domain model](tourism-platform/docs/domain-model.md)
+- [Repository strategy](tourism-platform/docs/repository-strategy.md)
+- [Architecture decisions](tourism-platform/docs/decisions)
+- [Legacy analysis](tourism-platform/docs/legacy-project-analysis.md)
+
+Legacy Android repository используется только как источник первоначальных
+сценариев. Его code, architecture и resources не переносятся.
+
+## Видимость проекта
+
+Этот public repository предназначен для демонстрации архитектуры и прогресса
+проекта. Implementation repositories могут оставаться private до готовности к
+публичному release.
