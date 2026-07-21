@@ -45,6 +45,8 @@ crimea-travel-platform/
 - Python 3.13, FastAPI, Pydantic v2 и SQLAlchemy 2.
 - PostgreSQL с PostGIS, Redis и S3-compatible storage.
 - Provider-neutral `RoutingProvider`.
+- Kafka как conditional event backbone будущих independently deployable
+  services; broker runtime пока не добавлен.
 - Docker Compose локально; Kubernetes и Helm в infrastructure repository.
 
 ## Начало работы
@@ -77,6 +79,7 @@ make up
 - [Domain model](tourism-platform/docs/domain-model.md)
 - [Repository strategy](tourism-platform/docs/repository-strategy.md)
 - [Architecture decisions](tourism-platform/docs/decisions)
+- [Preliminary event catalog](tourism-platform/docs/events/event-catalog.md)
 - [Legacy analysis](tourism-platform/docs/legacy-project-analysis.md)
 
 Legacy Android repository используется только как источник первоначальных
