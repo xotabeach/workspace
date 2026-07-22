@@ -10,55 +10,52 @@ Crimea Travel Platform — greenfield-платформа для поиска т�
 
 ## Статус
 
-Проект находится на стадии architecture and foundation. Реализованы skeleton
-`tourism-backend` и `tourism-mobile` как private submodules. Production
-infrastructure ещё не реализована.
+Стадия foundation (Phase 0–1). Skeleton `tourism-backend` и `tourism-mobile`
+подключены как private GitLab submodules. Local Compose готов; production
+deploy ещё не реализован.
 
 ## Архитектура repositories
 
-Этот repository является Git superproject и фиксирует совместимые commits
-компонентов через submodules:
+Этот repository (`workspace`) — Git superproject:
 
 ```text
-crimea-travel-platform/
-├── tourism-platform/
-├── tourism-mobile/
-├── tourism-backend/
-├── tourism-infrastructure/
-└── tourism-documentation/
+workspace/
+├── docs/                 # индекс канонической документации
+├── tourism-platform/     # docs, Compose, будущие Helm/K8s
+├── tourism-backend/      # FastAPI modular monolith
+└── tourism-mobile/       # Flutter app
 ```
 
 | Repository | Назначение | Статус |
 | --- | --- | --- |
-| [`tourism-platform`](tourism-platform) | Архитектура, local Compose и tooling | Foundation |
-| [`tourism-mobile`](tourism-mobile) | Flutter application для Android и iOS | Foundation skeleton |
+| [`tourism-platform`](tourism-platform) | Docs, local Compose, infra assets | Foundation |
 | [`tourism-backend`](tourism-backend) | Python/FastAPI modular monolith | Foundation skeleton |
-| `tourism-infrastructure` | Kubernetes, Helm и environments | Planned |
-| `tourism-documentation` | Расширенная документация | Planned |
+| [`tourism-mobile`](tourism-mobile) | Flutter Android/iOS | Foundation skeleton |
 
-Планируемые backend boundaries: `identity`, `users`, `geography`, `places`,
-`routes`, `route_builder` и `media`. Они начинаются как modules одного backend
-и выделяются в микросервисы только при подтверждённой необходимости.
+Дополнительные repositories не создаются. Kubernetes/Helm и продуктовая
+документация живут в `tourism-platform`.
+
+Backend module boundaries: `identity`, `users`, `geography`, `places`,
+`routes`, `route_builder`, `route_execution`, `favorites`, `subscriptions`,
+`media`.
 
 ## Технологическое направление
 
-- Flutter, Riverpod, GoRouter, Dio и offline-first foundation.
-- Python 3.13, FastAPI, Pydantic v2 и SQLAlchemy 2.
-- PostgreSQL с PostGIS, Redis и S3-compatible storage.
+- Flutter, Riverpod, GoRouter, Dio.
+- Python 3.13, FastAPI, Pydantic v2, SQLAlchemy 2.
+- PostgreSQL/PostGIS, Redis, S3-compatible storage (MinIO local).
 - Provider-neutral `RoutingProvider`.
-- Kafka как conditional event backbone будущих independently deployable
-  services; broker runtime пока не добавлен.
-- Docker Compose локально; Kubernetes и Helm в infrastructure repository.
+- Kafka только после подтверждённого сценария (ADR-005).
+- Docker Compose локально; GitLab CI; Helm позже в `tourism-platform`.
 
 ## Начало работы
-
-Клонирование со всеми submodules (требуется доступ к private GitLab group):
 
 ```bash
 git clone --recurse-submodules \
   https://gitlab.com/travel-platform2/workspace.git
 cd workspace
 make init
+make up
 ```
 
 Для SSH вместо HTTPS локально:
@@ -67,53 +64,30 @@ make init
 git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
 ```
 
-Первичная миграция или пересоздание remote projects на GitLab:
-
-```bash
-./scripts/migrate-to-gitlab.sh
-```
-
-Перенос projects в GitLab group `travel-platform2` (group создаётся в UI, затем):
-
-```bash
-make setup-gitlab-group
-```
-
-Public showcase mirror на GitHub (org без региональных названий, например `travel-platform`):
-
-```bash
-make mirror-github
-```
-
-Обновление submodule pointers:
-
-```bash
-make update
-```
-
-Запуск local infrastructure:
-
-```bash
-make up
-```
+| Команда | Назначение |
+| --- | --- |
+| `make init` | Submodules + platform `.env` |
+| `make up` / `down` / `ps` / `logs` | Local infrastructure |
+| `make validate` | Безопасные проверки |
+| `make update` | Обновить submodule pointers (затем закоммитить) |
+| `make clean CONFIRM=yes` | Удалить volumes |
 
 ## Документация
 
+Канон находится в `tourism-platform/docs/`. Индекс: [docs/README.md](docs/README.md).
+
+- [Business logic](tourism-platform/docs/application-business-logic.md)
+- [Implementation plan](tourism-platform/docs/implementation-plan.md)
+- [Development conventions](tourism-platform/docs/development-conventions.md)
 - [Product vision](tourism-platform/docs/product-vision.md)
-- [System context](tourism-platform/docs/system-context.md)
 - [Domain model](tourism-platform/docs/domain-model.md)
 - [Repository strategy](tourism-platform/docs/repository-strategy.md)
+- [Local development](tourism-platform/docs/local-development.md)
 - [Architecture decisions](tourism-platform/docs/decisions)
-- [Preliminary event catalog](tourism-platform/docs/events/event-catalog.md)
-- [Legacy analysis](tourism-platform/docs/legacy-project-analysis.md)
 
-Legacy Android repository используется только как источник первоначальных
-сценариев. Его code, architecture и resources не переносятся.
+Legacy Android repository — только источник сценариев, код не переносится.
 
-## Видимость проекта
-
-Основной workspace размещён в private GitLab projects. После `make setup-gitlab-group`
-структура выглядит так:
+## Видимость
 
 ```text
 gitlab.com/travel-platform2/
@@ -123,5 +97,4 @@ gitlab.com/travel-platform2/
 └── tourism-mobile/
 ```
 
-GitHub используется только как public showcase mirror (`tourism-platform`, `workspace`).
-Источник истины для разработки — GitLab.
+Источник истины — GitLab. GitHub mirror (опционально) — только public showcase.

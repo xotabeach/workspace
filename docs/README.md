@@ -1,0 +1,28 @@
+# Документация workspace
+
+Канонические документы живут в submodule `tourism-platform/docs/`, чтобы не
+дублировать product/architecture content.
+
+## Основные документы
+
+| Документ | Путь |
+| --- | --- |
+| Бизнес-логика | [../tourism-platform/docs/application-business-logic.md](../tourism-platform/docs/application-business-logic.md) |
+| План реализации | [../tourism-platform/docs/implementation-plan.md](../tourism-platform/docs/implementation-plan.md) |
+| Conventions | [../tourism-platform/docs/development-conventions.md](../tourism-platform/docs/development-conventions.md) |
+| Domain model | [../tourism-platform/docs/domain-model.md](../tourism-platform/docs/domain-model.md) |
+| Local development | [../tourism-platform/docs/local-development.md](../tourism-platform/docs/local-development.md) |
+| Repository strategy | [../tourism-platform/docs/repository-strategy.md](../tourism-platform/docs/repository-strategy.md) |
+
+## Development workflow (submodules)
+
+1. Изменения коммитятся и мержатся в дочернем repository
+   (`tourism-platform`, `tourism-backend`, `tourism-mobile`).
+2. В `workspace` обновляется submodule pointer на нужный SHA.
+3. Отдельный commit в `workspace` фиксирует совместимый набор версий.
+4. `git push` только по явной договорённости; foundation-сессии могут
+   оставлять изменения локально.
+
+Порядок merge: сначала child repos, затем workspace pointer.
+
+См. [development-conventions.md](../tourism-platform/docs/development-conventions.md).
