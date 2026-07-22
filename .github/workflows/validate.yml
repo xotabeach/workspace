@@ -13,10 +13,13 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: Checkout superproject and submodules
+      - name: Checkout superproject
         uses: actions/checkout@v7
-        with:
-          submodules: recursive
+
+      - name: Checkout public tourism-platform submodule
+        run: |
+          git submodule sync tourism-platform
+          git submodule update --init --depth=1 tourism-platform
 
       - name: Lint root Markdown
         uses: DavidAnson/markdownlint-cli2-action@v23
