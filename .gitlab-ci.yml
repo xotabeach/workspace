@@ -17,4 +17,6 @@ workspace-validate:
     - bash -n scripts/migrate-to-gitlab.sh
     - bash -n scripts/mirror-to-github.sh
     - bash -n scripts/setup-gitlab-group.sh
-    - test -f tourism-platform/compose.yaml || echo "NOTE: submodule not checked out; compose validated in tourism-platform CI"
+    - >
+      test -f tourism-platform/compose.yaml
+      || echo "NOTE: submodule not checked out; compose validated in tourism-platform CI"
