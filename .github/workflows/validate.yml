@@ -1,0 +1,22 @@
+name: Validate showcase workspace
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-readme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Lint README
+        uses: DavidAnson/markdownlint-cli2-action@v23
+        with:
+          globs: "README.md"

@@ -67,6 +67,18 @@ make init
 ./scripts/migrate-to-gitlab.sh
 ```
 
+Перенос projects в GitLab group `travel-platform` (group создаётся в UI, затем):
+
+```bash
+make setup-gitlab-group
+```
+
+Public showcase mirror на GitHub (org без региональных названий, например `travel-platform`):
+
+```bash
+make mirror-github
+```
+
 Обновление submodule pointers:
 
 ```bash
@@ -94,7 +106,16 @@ Legacy Android repository используется только как исто�
 
 ## Видимость проекта
 
-Основной workspace размещён в private GitLab projects namespace
-`xotabeach`. Доступ к implementation repositories выдаётся участникам проекта
-через GitLab project members. GitHub больше не используется из-за trade control
-ограничений на private repositories.
+Основной workspace размещён в private GitLab projects. После `make setup-gitlab-group`
+структура выглядит так:
+
+```text
+gitlab.com/travel-platform/
+├── workspace/
+├── tourism-platform/
+├── tourism-backend/
+└── tourism-mobile/
+```
+
+GitHub используется только как public showcase mirror (`tourism-platform`, `workspace`).
+Источник истины для разработки — GitLab.

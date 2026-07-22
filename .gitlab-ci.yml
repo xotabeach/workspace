@@ -1,19 +1,16 @@
 stages:
   - validate
 
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  DOCKER_TLS_CERTDIR: "/certs"
+
 workspace-validate:
   stage: validate
   image: docker:27-cli
   services:
-    - name: docker:27-dind
-      alias: docker
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
+    - docker:27-dind
   before_script:
-    - apk add --no-cache bash make python3 py3-pip git
-    - pip install --disable-pip-version-check yamllint==1.37.1
-    - git submodule sync tourism-platform
-    - git submodule update --init --depth=1 tourism-platform
+    - apk add --no-cache bash make git py3-yamllint
   script:
     - make validate

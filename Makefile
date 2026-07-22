@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 .DEFAULT_GOAL := help
 
-.PHONY: help init update status validate up down restart ps logs clean migrate-gitlab
+.PHONY: help init update status validate up down restart ps logs clean migrate-gitlab setup-gitlab-group mirror-github
 
 help: ## Показать доступные команды
 	@awk 'BEGIN {FS = ":.*## "; printf "Использование: make <command>\n\n"} /^[a-zA-Z_-]+:.*## / {printf "  %-16s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -45,3 +45,9 @@ clean: ## Удалить local volumes (требует CONFIRM=yes)
 
 migrate-gitlab: ## Создать GitLab projects и push всех repositories
 	@./scripts/migrate-to-gitlab.sh
+
+setup-gitlab-group: ## Перенести projects в GitLab group travel-platform
+	@./scripts/setup-gitlab-group.sh
+
+mirror-github: ## Обновить public showcase mirror на GitHub
+	@./scripts/mirror-to-github.sh
