@@ -56,7 +56,7 @@ crimea-travel-platform/
 
 ```bash
 git clone --recurse-submodules \
-  https://gitlab.com/crimea-travel-platform/crimea-travel-platform.git
+  git@gitlab.com:xotabeach/crimea-travel-platform.git
 cd crimea-travel-platform
 make init
 ```
@@ -94,7 +94,7 @@ Legacy Android repository используется только как исто�
 
 ## Видимость проекта
 
-Основной workspace размещён в private GitLab group
-`crimea-travel-platform`. Доступ к implementation repositories выдаётся
-участникам проекта. GitHub-зеркало больше не используется из-за trade control
+Основной workspace размещён в private GitLab projects namespace
+`xotabeach`. Доступ к implementation repositories выдаётся участникам проекта
+через GitLab project members. GitHub больше не используется из-за trade control
 ограничений на private repositories.
