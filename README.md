@@ -76,6 +76,7 @@ git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
 
 Канон находится в `tourism-platform/docs/`. Индекс: [docs/README.md](docs/README.md).
 
+- [Progress — что сделано / дальше](tourism-platform/docs/progress.md)
 - [Business logic](tourism-platform/docs/application-business-logic.md)
 - [Implementation plan](tourism-platform/docs/implementation-plan.md)
 - [Development conventions](tourism-platform/docs/development-conventions.md)
