@@ -10,8 +10,9 @@ Crimea Travel Platform — greenfield-платформа для поиска т�
 
 ## Статус
 
-Проект находится на стадии architecture and foundation. Полноценные backend,
-Flutter application и production infrastructure ещё не реализованы.
+Проект находится на стадии architecture and foundation. Реализованы skeleton
+`tourism-backend` и `tourism-mobile` как private submodules. Production
+infrastructure ещё не реализована.
 
 ## Архитектура repositories
 
@@ -30,8 +31,8 @@ crimea-travel-platform/
 | Repository | Назначение | Статус |
 | --- | --- | --- |
 | [`tourism-platform`](tourism-platform) | Архитектура, local Compose и tooling | Foundation |
-| `tourism-mobile` | Flutter application для Android и iOS | Planned |
-| `tourism-backend` | Python/FastAPI modular monolith | Planned |
+| [`tourism-mobile`](tourism-mobile) | Flutter application для Android и iOS | Foundation skeleton |
+| [`tourism-backend`](tourism-backend) | Python/FastAPI modular monolith | Foundation skeleton |
 | `tourism-infrastructure` | Kubernetes, Helm и environments | Planned |
 | `tourism-documentation` | Расширенная документация | Planned |
 

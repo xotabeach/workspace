@@ -1,3 +1,9 @@
 [submodule "tourism-platform"]
 	path = tourism-platform
 	url = https://github.com/crimea-travel-platform/tourism-platform.git
+[submodule "tourism-backend"]
+	path = tourism-backend
+	url = https://github.com/crimea-travel-platform/tourism-backend.git
+[submodule "tourism-mobile"]
+	path = tourism-mobile
+	url = https://github.com/crimea-travel-platform/tourism-mobile.git
