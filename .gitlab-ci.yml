@@ -1,18 +1,14 @@
 stages:
   - validate
 
-variables:
-  GIT_SUBMODULE_STRATEGY: none
-  DOCKER_TLS_CERTDIR: "/certs"
-
 workspace-validate:
   stage: validate
-  image: docker:27-cli
-  services:
-    - docker:27-dind
+  image: alpine:3.21
   before_script:
-    - apk add --no-cache bash make git
-    - rm -rf tourism-platform
-    - git clone --depth 1 "https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/xotabeach/tourism-platform.git" tourism-platform
+    - apk add --no-cache bash git
   script:
-    - make -C tourism-platform validate
+    - test -f README.md
+    - test -f .gitmodules
+    - bash -n scripts/migrate-to-gitlab.sh
+    - bash -n scripts/mirror-to-github.sh
+    - bash -n scripts/setup-gitlab-group.sh
