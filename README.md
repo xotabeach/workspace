@@ -56,9 +56,15 @@ crimea-travel-platform/
 
 ```bash
 git clone --recurse-submodules \
-  git@gitlab.com:xotabeach/crimea-travel-platform.git
+  https://gitlab.com/xotabeach/crimea-travel-platform.git
 cd crimea-travel-platform
 make init
+```
+
+Для SSH вместо HTTPS локально:
+
+```bash
+git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
 ```
 
 Первичная миграция или пересоздание remote projects на GitLab:

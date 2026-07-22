@@ -71,7 +71,7 @@ if glab api "projects/${GITLAB_GROUP}%2Fcrimea-travel-platform" >/dev/null 2>&1 
   glab api --method PUT "projects/${superproject_id}" -f path="${SUPERPROJECT_NAME}"
 fi
 
-new_base="git@${GITLAB_HOST}:${GITLAB_GROUP}"
+new_base="https://${GITLAB_HOST}/${GITLAB_GROUP}"
 
 for path in tourism-platform tourism-backend tourism-mobile; do
   remote="${new_base}/${path}.git"

@@ -1,9 +1,9 @@
 [submodule "tourism-platform"]
 	path = tourism-platform
-	url = git@gitlab.com:xotabeach/tourism-platform.git
+	url = https://gitlab.com/xotabeach/tourism-platform.git
 [submodule "tourism-backend"]
 	path = tourism-backend
-	url = git@gitlab.com:xotabeach/tourism-backend.git
+	url = https://gitlab.com/xotabeach/tourism-backend.git
 [submodule "tourism-mobile"]
 	path = tourism-mobile
-	url = git@gitlab.com:xotabeach/tourism-mobile.git
+	url = https://gitlab.com/xotabeach/tourism-mobile.git

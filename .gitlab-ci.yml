@@ -1,6 +1,9 @@
 stages:
   - validate
 
+variables:
+  GIT_SUBMODULE_STRATEGY: none
+
 workspace-validate:
   stage: validate
   image: alpine:3.21

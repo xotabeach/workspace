@@ -36,7 +36,7 @@ if [[ -z "${GITLAB_NAMESPACE}" ]]; then
   GITLAB_NAMESPACE="$(glab api user | python3 -c 'import json,sys; print(json.load(sys.stdin)["username"])')"
 fi
 
-GITLAB_BASE_URL="git@${GITLAB_HOST}:${GITLAB_NAMESPACE}"
+GITLAB_BASE_URL="https://${GITLAB_HOST}/${GITLAB_NAMESPACE}"
 
 printf 'Using GitLab namespace %s\n' "${GITLAB_NAMESPACE}"
 
