@@ -5,7 +5,7 @@ set -Eeuo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 SUPERPROJECT_ROOT="$(cd -- "${SCRIPT_DIR}/.." && pwd)"
 GITLAB_HOST="${GITLAB_HOST:-gitlab.com}"
-GITLAB_GROUP="${GITLAB_GROUP:-travel-platform}"
+GITLAB_GROUP="${GITLAB_GROUP:-travel-platform2}"
 SUPERPROJECT_NAME="${SUPERPROJECT_NAME:-workspace}"
 
 PROJECTS=(

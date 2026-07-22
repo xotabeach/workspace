@@ -56,8 +56,8 @@ crimea-travel-platform/
 
 ```bash
 git clone --recurse-submodules \
-  https://gitlab.com/xotabeach/crimea-travel-platform.git
-cd crimea-travel-platform
+  https://gitlab.com/travel-platform2/workspace.git
+cd workspace
 make init
 ```
 
@@ -73,7 +73,7 @@ git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
 ./scripts/migrate-to-gitlab.sh
 ```
 
-Перенос projects в GitLab group `travel-platform` (group создаётся в UI, затем):
+Перенос projects в GitLab group `travel-platform2` (group создаётся в UI, затем):
 
 ```bash
 make setup-gitlab-group
@@ -116,7 +116,7 @@ Legacy Android repository используется только как исто�
 структура выглядит так:
 
 ```text
-gitlab.com/travel-platform/
+gitlab.com/travel-platform2/
 ├── workspace/
 ├── tourism-platform/
 ├── tourism-backend/
