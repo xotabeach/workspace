@@ -52,13 +52,19 @@ crimea-travel-platform/
 
 ## Начало работы
 
-Клонирование со всеми доступными submodules:
+Клонирование со всеми submodules (требуется доступ к private GitLab group):
 
 ```bash
 git clone --recurse-submodules \
-  https://github.com/crimea-travel-platform/crimea-travel-platform.git
+  https://gitlab.com/crimea-travel-platform/crimea-travel-platform.git
 cd crimea-travel-platform
 make init
+```
+
+Первичная миграция или пересоздание remote projects на GitLab:
+
+```bash
+./scripts/migrate-to-gitlab.sh
 ```
 
 Обновление submodule pointers:
@@ -88,6 +94,7 @@ Legacy Android repository используется только как исто�
 
 ## Видимость проекта
 
-Этот public repository предназначен для демонстрации архитектуры и прогресса
-проекта. Implementation repositories могут оставаться private до готовности к
-публичному release.
+Основной workspace размещён в private GitLab group
+`crimea-travel-platform`. Доступ к implementation repositories выдаётся
+участникам проекта. GitHub-зеркало больше не используется из-за trade control
+ограничений на private repositories.

@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 .DEFAULT_GOAL := help
 
-.PHONY: help init update status validate up down restart ps logs clean
+.PHONY: help init update status validate up down restart ps logs clean migrate-gitlab
 
 help: ## Показать доступные команды
 	@awk 'BEGIN {FS = ":.*## "; printf "Использование: make <command>\n\n"} /^[a-zA-Z_-]+:.*## / {printf "  %-16s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -42,3 +42,6 @@ logs: ## Следить за local logs
 
 clean: ## Удалить local volumes (требует CONFIRM=yes)
 	@$(MAKE) -C tourism-platform clean CONFIRM="$(CONFIRM)"
+
+migrate-gitlab: ## Создать GitLab projects и push всех repositories
+	@./scripts/migrate-to-gitlab.sh
