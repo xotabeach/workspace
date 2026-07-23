@@ -6,10 +6,13 @@ alwaysApply: true
 # Security baseline invariants
 
 Read `tourism-platform/docs/security/` before auth, token, storage, upload,
-AI/RAG, or infrastructure changes. Use Skill `travel-platform-security-audit`
-for security-sensitive work.
+AI/RAG, frontend↔API, or infrastructure changes. Use Skill
+`travel-platform-security-audit` for security-sensitive work.
 
-- All external inputs are untrusted.
+## Non-negotiable
+
+- All external inputs are untrusted (body, query, path, headers, files,
+  deep links, AI output, provider responses).
 - Explicit object/function authorization; UUID is not authZ.
 - Parameterized SQL / ORM only; allowlist dynamic identifiers.
 - No secrets in Git, images, logs, mobile bundles, or prompts.
@@ -19,5 +22,27 @@ for security-sensitive work.
 - Explicit request/response DTOs; no ORM dump; no client-set roles/owner.
 - No arbitrary HTML, unsafe WebView, or arbitrary server-side URL fetch.
 - Enforce limits and timeouts (lists, uploads, providers, AI tools).
-- Security-sensitive changes need regression tests.
 - Never silently weaken a documented security control.
+
+## Mandatory after frontend / client-data changes
+
+Whenever you change **mobile UI**, **API that accepts client input**, or
+**rendering of server/user/editorial text**, you MUST:
+
+1. Treat content as untrusted (XSS): Flutter `Text` / no raw HTML WebView;
+   never `javascript:` / unsanitized HTML. Backend stores text, does not
+   interpret as HTML.
+2. Keep SQL parameterized (injection): no f-string/format SQL; sort/filter
+   allowlists only.
+3. Apply CSRF rules correctly: Bearer native mobile ≠ cookie CSRF; do not
+   skip authZ because “CSRF N/A”. Cookie/web/admin later needs CSRF.
+4. Bound inputs (length, pagination, enums) on every new query/body field.
+5. Add or extend **security regression tests** for the touched surface
+   (SQLi-like strings, oversized input, XSS-like payloads as data,
+   unpublished/private not leaked).
+6. Run before claiming done:
+   - backend: `uv run pytest tests/security` (+ relevant API tests);
+   - mobile: `flutter test test/security` (+ widget tests if UI changed);
+   - at least `ruff`/`mypy` or `flutter analyze --fatal-infos`.
+
+Do not mark a frontend/API change complete without these checks.

@@ -13,4 +13,8 @@ alwaysApply: false
 - Ruff for format + lint; no Black/isort/flake8 alongside.
 - Prefer enums/Literals over magic strings; timezone-aware datetimes; structured logging (no `print`).
 - Style: `tourism-platform/docs/python-code-style.md`.
-- After changes: `./scripts/validate.sh` or `make backend-check`.
+- Security: any new/changed endpoint that takes client input needs bounds +
+  security regression coverage (`tests/security`); ORM/bound params only.
+  See always-on `security-baseline` rule and `docs/security/`.
+- After changes: `./scripts/validate.sh` or `make backend-check`; if API/input
+  touched also `uv run pytest tests/security`.

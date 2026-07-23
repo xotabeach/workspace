@@ -13,4 +13,8 @@ alwaysApply: false
 - After `await`, respect mounted / BuildContext safety.
 - Dependencies via `flutter pub add`; commit `pubspec.lock`.
 - Style: `tourism-platform/docs/flutter-code-style.md`.
+- Security: render API/user text as text only (no HTML/WebView for untrusted
+  content); no tokens in logs/UI; secure storage for credentials. After UI or
+  network parsing changes run `flutter test test/security` and relevant widget
+  tests. See always-on `security-baseline` rule.
 - After changes: `./scripts/validate.sh` or `make mobile-check` (`analyze --fatal-infos`).

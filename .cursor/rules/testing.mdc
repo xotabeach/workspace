@@ -11,4 +11,8 @@ alwaysApply: false
 - Backend: mock ports/interfaces; PostGIS integration against real DB in CI/Compose.
 - Mobile: fake repositories; targeted widget tests; few integration/goldens.
 - Bug fixes need regression tests.
-- Guides: `python-testing-guide.md`, `flutter-testing-guide.md` in tourism-platform/docs.
+- Frontend / client-input API changes: include security regressions
+  (injection payloads as ordinary strings, oversized input, XSS-like content
+  treated as data, authZ negatives when private resources exist).
+- Guides: `python-testing-guide.md`, `flutter-testing-guide.md`,
+  `security/security-testing-guide.md` in tourism-platform/docs.
