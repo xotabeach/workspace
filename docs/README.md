@@ -16,6 +16,7 @@
 | Development environment (DX) | [../tourism-platform/docs/development-environment.md](../tourism-platform/docs/development-environment.md) |
 | Python code style | [../tourism-platform/docs/python-code-style.md](../tourism-platform/docs/python-code-style.md) |
 | Flutter code style | [../tourism-platform/docs/flutter-code-style.md](../tourism-platform/docs/flutter-code-style.md) |
+| Phase/screens map (для дизайна) | [../tourism-platform/docs/diagrams/phase-and-screens-map.md](../tourism-platform/docs/diagrams/phase-and-screens-map.md) |
 | Domain model | [../tourism-platform/docs/domain-model.md](../tourism-platform/docs/domain-model.md) |
 | Local development | [../tourism-platform/docs/local-development.md](../tourism-platform/docs/local-development.md) |
 | Repository strategy | [../tourism-platform/docs/repository-strategy.md](../tourism-platform/docs/repository-strategy.md) |

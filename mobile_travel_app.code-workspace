@@ -40,13 +40,20 @@
       "**/.pytest_cache": true,
       "**/build": true,
       "**/.dart_tool": true,
+      "**/ios/Flutter/ephemeral": true,
       "**/uv.lock": false
     },
     "files.watcherExclude": {
       "**/.venv/**": true,
       "**/build/**": true,
-      "**/.dart_tool/**": true
-    }
+      "**/.dart_tool/**": true,
+      "**/ios/Flutter/ephemeral/**": true
+    },
+    "python.analysis.exclude": [
+      "**/ios/Flutter/ephemeral/**",
+      "**/.venv/**",
+      "**/build/**"
+    ]
   },
   "extensions": {
     "recommendations": [
