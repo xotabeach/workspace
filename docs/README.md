@@ -14,6 +14,7 @@
 | План реализации | [../tourism-platform/docs/implementation-plan.md](../tourism-platform/docs/implementation-plan.md) |
 | Conventions | [../tourism-platform/docs/development-conventions.md](../tourism-platform/docs/development-conventions.md) |
 | Development environment (DX) | [../tourism-platform/docs/development-environment.md](../tourism-platform/docs/development-environment.md) |
+| **Security baseline** | [../tourism-platform/docs/security/security-baseline.md](../tourism-platform/docs/security/security-baseline.md) |
 | Python code style | [../tourism-platform/docs/python-code-style.md](../tourism-platform/docs/python-code-style.md) |
 | Flutter code style | [../tourism-platform/docs/flutter-code-style.md](../tourism-platform/docs/flutter-code-style.md) |
 | Phase/screens map (для дизайна) | [../tourism-platform/docs/diagrams/phase-and-screens-map.md](../tourism-platform/docs/diagrams/phase-and-screens-map.md) |

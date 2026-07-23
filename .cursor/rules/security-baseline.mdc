@@ -1,0 +1,23 @@
+---
+description: Security invariants for CrimeaTrip (always on)
+alwaysApply: true
+---
+
+# Security baseline invariants
+
+Read `tourism-platform/docs/security/` before auth, token, storage, upload,
+AI/RAG, or infrastructure changes. Use Skill `travel-platform-security-audit`
+for security-sensitive work.
+
+- All external inputs are untrusted.
+- Explicit object/function authorization; UUID is not authZ.
+- Parameterized SQL / ORM only; allowlist dynamic identifiers.
+- No secrets in Git, images, logs, mobile bundles, or prompts.
+- No plaintext/reversible/weak password hashes; Argon2id when auth lands.
+- No tokens/passwords in logs, analytics, crash reports, deep links.
+- Mobile credentials only via Keychain/Keystore-backed secure storage.
+- Explicit request/response DTOs; no ORM dump; no client-set roles/owner.
+- No arbitrary HTML, unsafe WebView, or arbitrary server-side URL fetch.
+- Enforce limits and timeouts (lists, uploads, providers, AI tools).
+- Security-sensitive changes need regression tests.
+- Never silently weaken a documented security control.
