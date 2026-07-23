@@ -9,6 +9,7 @@
 | --- | --- |
 | **Progress (что сделано / дальше)** | [../tourism-platform/docs/progress.md](../tourism-platform/docs/progress.md) |
 | Geography/places DB model | [../tourism-platform/docs/data-model-geography-places.md](../tourism-platform/docs/data-model-geography-places.md) |
+| AI route planning architecture | [../tourism-platform/docs/ai-route-planning-architecture.md](../tourism-platform/docs/ai-route-planning-architecture.md) |
 | Бизнес-логика | [../tourism-platform/docs/application-business-logic.md](../tourism-platform/docs/application-business-logic.md) |
 | План реализации | [../tourism-platform/docs/implementation-plan.md](../tourism-platform/docs/implementation-plan.md) |
 | Conventions | [../tourism-platform/docs/development-conventions.md](../tourism-platform/docs/development-conventions.md) |
