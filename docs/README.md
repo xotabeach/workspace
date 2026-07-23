@@ -17,6 +17,7 @@
 | **Security baseline** | [../tourism-platform/docs/security/security-baseline.md](../tourism-platform/docs/security/security-baseline.md) |
 | Python code style | [../tourism-platform/docs/python-code-style.md](../tourism-platform/docs/python-code-style.md) |
 | Flutter code style | [../tourism-platform/docs/flutter-code-style.md](../tourism-platform/docs/flutter-code-style.md) |
+| Flutter app architecture (Phase 5) | [../tourism-platform/docs/flutter-app-architecture.md](../tourism-platform/docs/flutter-app-architecture.md) |
 | Phase/screens map (для дизайна) | [../tourism-platform/docs/diagrams/phase-and-screens-map.md](../tourism-platform/docs/diagrams/phase-and-screens-map.md) |
 | Domain model | [../tourism-platform/docs/domain-model.md](../tourism-platform/docs/domain-model.md) |
 | Local development | [../tourism-platform/docs/local-development.md](../tourism-platform/docs/local-development.md) |
