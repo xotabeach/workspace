@@ -1,0 +1,13 @@
+---
+description: Documentation editing rules
+globs: "**/*.md"
+alwaysApply: false
+---
+
+# Documentation
+
+- Prefer updating existing canonical docs over new parallel files.
+- Keep `progress.md` in sync when completing a phase.
+- Russian prose OK; technical identifiers in English.
+- Link related ADRs and implementation-plan phases.
+- Do not invent “done” status for work that was not implemented.

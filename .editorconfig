@@ -8,8 +8,17 @@ indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
 
+[*.py]
+indent_size = 4
+
+[*.dart]
+indent_size = 2
+
 [Makefile]
 indent_style = tab
 
 [*.md]
 trim_trailing_whitespace = false
+
+[*.{lock,g.dart,freezed.dart}]
+insert_final_newline = true

@@ -1,0 +1,14 @@
+---
+description: Testing expectations
+globs: "**/{tests,test,**/test}/**/*"
+alwaysApply: false
+---
+
+# Tests
+
+- Behavior over private implementation; arrange/act/assert.
+- Naming: `test_<behavior>_when_<condition>_<expected>`.
+- Backend: mock ports/interfaces; PostGIS integration against real DB in CI/Compose.
+- Mobile: fake repositories; targeted widget tests; few integration/goldens.
+- Bug fixes need regression tests.
+- Guides: `python-testing-guide.md`, `flutter-testing-guide.md` in tourism-platform/docs.

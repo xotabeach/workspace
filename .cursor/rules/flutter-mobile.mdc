@@ -1,0 +1,16 @@
+---
+description: Flutter/Dart mobile conventions
+globs: tourism-mobile/**/*
+alwaysApply: false
+---
+
+# Mobile (tourism-mobile)
+
+- Feature-first: `application` / `domain` / `data` / `presentation`.
+- Widgets do not call Dio; use Riverpod providers + repository interfaces.
+- Freezed/json_serializable/build_runner are Phase 5 — do not add until that phase.
+- Prefer const widgets; handle loading/error/empty/success for async screens.
+- After `await`, respect mounted / BuildContext safety.
+- Dependencies via `flutter pub add`; commit `pubspec.lock`.
+- Style: `tourism-platform/docs/flutter-code-style.md`.
+- After changes: `./scripts/validate.sh` or `make mobile-check` (`analyze --fatal-infos`).

@@ -1,0 +1,63 @@
+{
+  "folders": [
+    { "name": "workspace", "path": "." },
+    { "name": "tourism-platform", "path": "tourism-platform" },
+    { "name": "tourism-backend", "path": "tourism-backend" },
+    { "name": "tourism-mobile", "path": "tourism-mobile" }
+  ],
+  "settings": {
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.formatOnSave": true,
+    "editor.rulers": [100],
+    "python.defaultInterpreterPath": "${workspaceFolder:tourism-backend}/.venv/bin/python",
+    "python.analysis.typeCheckingMode": "standard",
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.autoImportCompletions": true,
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": ["tests"],
+    "[python]": {
+      "editor.defaultFormatter": "charliermarsh.ruff",
+      "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+      }
+    },
+    "[dart]": {
+      "editor.defaultFormatter": "Dart-Code.dart-code",
+      "editor.rulers": [80],
+      "editor.selectionHighlight": false,
+      "editor.tabCompletion": "only"
+    },
+    "dart.flutterSdkPath": null,
+    "search.exclude": {
+      "**/.venv": true,
+      "**/__pycache__": true,
+      "**/.mypy_cache": true,
+      "**/.ruff_cache": true,
+      "**/.pytest_cache": true,
+      "**/build": true,
+      "**/.dart_tool": true,
+      "**/uv.lock": false
+    },
+    "files.watcherExclude": {
+      "**/.venv/**": true,
+      "**/build/**": true,
+      "**/.dart_tool/**": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "charliermarsh.ruff",
+      "Dart-Code.dart-code",
+      "Dart-Code.flutter",
+      "tamasfe.even-better-toml",
+      "redhat.vscode-yaml",
+      "EditorConfig.EditorConfig"
+    ]
+  }
+}

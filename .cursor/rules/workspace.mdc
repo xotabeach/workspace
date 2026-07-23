@@ -1,0 +1,15 @@
+---
+description: Core project rules for Crimea Travel Platform workspace
+alwaysApply: true
+---
+
+# Workspace rules
+
+- Read `tourism-platform/docs/progress.md` and `implementation-plan.md` before feature work; respect current Phase scope.
+- Canonical docs live in `tourism-platform/docs/`; do not duplicate product docs in other repos.
+- Submodule workflow: commit in child repos first, then bump pointers in workspace.
+- Never `git push` unless the user explicitly asks.
+- Never commit secrets, `.env`, API keys, or `.tmp-ref-frames/`.
+- Do not claim checks passed unless you ran them; report actual command results.
+- Do not invent empty abstractions or files "for later" without need.
+- Do not mass-upgrade dependencies.

@@ -1,0 +1,16 @@
+---
+description: Python/FastAPI backend conventions
+globs: tourism-backend/**/*
+alwaysApply: false
+---
+
+# Backend (tourism-backend)
+
+- Architecture: presentation → application → domain; infrastructure implements ports.
+- Domain/application must not import FastAPI, SQLAlchemy engines, or AI provider SDKs.
+- Dependencies: `uv add` / `uv add --dev` (or optional-dependencies); commit `uv.lock`; never hand-edit lock.
+- Type hints on public application/domain functions; MyPy strict; no bare `type: ignore`.
+- Ruff for format + lint; no Black/isort/flake8 alongside.
+- Prefer enums/Literals over magic strings; timezone-aware datetimes; structured logging (no `print`).
+- Style: `tourism-platform/docs/python-code-style.md`.
+- After changes: `./scripts/validate.sh` or `make backend-check`.

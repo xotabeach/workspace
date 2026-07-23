@@ -1,0 +1,12 @@
+---
+description: Alembic migration rules
+globs: tourism-backend/alembic/**/*
+alwaysApply: false
+---
+
+# Migrations
+
+- New schema changes get an Alembic revision with upgrade and downgrade.
+- Do not edit applied migrations that are already on shared main without a follow-up revision.
+- Keep PostGIS types explicit; test `alembic upgrade head` against Compose when possible.
+- No business logic in migrations.
