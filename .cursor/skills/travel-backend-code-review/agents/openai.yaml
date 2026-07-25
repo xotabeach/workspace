@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backend Code Review"
+  short_description: "Review FastAPI correctness, security, and tests"
+  default_prompt: "Review the tourism-backend repository using project rules, report evidence-first findings, and write a remediation plan before editing."

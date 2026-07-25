@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mobile Code Review"
+  short_description: "Review Flutter correctness, security, UX, and tests"
+  default_prompt: "Review the tourism-mobile repository using project rules, report evidence-first findings, and write a remediation plan before editing."
