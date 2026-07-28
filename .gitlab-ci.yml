@@ -1,11 +1,22 @@
 stages:
-  - validate
+  - code-style
+  - run-tests
 
 variables:
   GIT_SUBMODULE_STRATEGY: none
 
-workspace-validate:
-  stage: validate
+workspace-code-style:
+  stage: code-style
+  image: alpine:3.21
+  before_script:
+    - apk add --no-cache bash git
+  script:
+    - bash -n scripts/migrate-to-gitlab.sh
+    - bash -n scripts/mirror-to-github.sh
+    - bash -n scripts/setup-gitlab-group.sh
+
+workspace-run-tests:
+  stage: run-tests
   image: alpine:3.21
   before_script:
     - apk add --no-cache bash git
@@ -14,9 +25,6 @@ workspace-validate:
     - test -f .gitmodules
     - test -f docs/README.md
     - test -f docs/development-workflow.md
-    - bash -n scripts/migrate-to-gitlab.sh
-    - bash -n scripts/mirror-to-github.sh
-    - bash -n scripts/setup-gitlab-group.sh
     - >
       test -f tourism-platform/compose.yaml
       || echo "NOTE: submodule not checked out; compose validated in tourism-platform CI"
