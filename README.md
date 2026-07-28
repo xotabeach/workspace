@@ -98,4 +98,10 @@ gitlab.com/travel-platform2/
 └── tourism-mobile/
 ```
 
-Источник истины — GitLab. GitHub mirror (опционально) — только public showcase.
+Источник истины — GitLab. GitHub — public showcase mirror
+(`xotabeach/workspace`, `tourism-platform`, `tourism-backend`, `tourism-mobile`).
+
+Автосинхронизация: GitLab CI job `github-mirror` на push в `gamma`/`main`
+(после зелёных `code-style` + `run-tests`). Нужны group variables
+`GITHUB_MIRROR_TOKEN` и `GITHUB_MIRROR_OWNER` — см.
+`tourism-platform/docs/development-conventions.md`.
