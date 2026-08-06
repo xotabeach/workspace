@@ -13,3 +13,7 @@ alwaysApply: true
 - Do not claim checks passed unless you ran them; report actual command results.
 - Do not invent empty abstractions or files "for later" without need.
 - Do not mass-upgrade dependencies.
+- **Lean GitLab CI:** shared pipelines do not run full style/tests. Before
+  commit/push or claiming done on backend/mobile/platform changes, follow
+  skill `travel-platform-local-ci` and run the repo `./scripts/validate.sh`
+  (see `tourism-platform/docs/ci-and-runners.md`).
