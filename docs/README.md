@@ -7,10 +7,12 @@
 
 | Документ | Путь |
 | --- | --- |
+| **Стек (local / test / Gemma 4)** | [../tourism-platform/docs/stack.md](../tourism-platform/docs/stack.md) |
 | **Progress (что сделано / дальше)** | [../tourism-platform/docs/progress.md](../tourism-platform/docs/progress.md) |
 | Geography/places DB model | [../tourism-platform/docs/data-model-geography-places.md](../tourism-platform/docs/data-model-geography-places.md) |
 | Routes DB model (Phase 4) | [../tourism-platform/docs/data-model-routes.md](../tourism-platform/docs/data-model-routes.md) |
 | AI route planning architecture | [../tourism-platform/docs/ai-route-planning-architecture.md](../tourism-platform/docs/ai-route-planning-architecture.md) |
+| Self-hosted Gemma 4 home lab | [../tourism-platform/docs/ai-self-hosted-home-lab.md](../tourism-platform/docs/ai-self-hosted-home-lab.md) |
 | Бизнес-логика | [../tourism-platform/docs/application-business-logic.md](../tourism-platform/docs/application-business-logic.md) |
 | План реализации | [../tourism-platform/docs/implementation-plan.md](../tourism-platform/docs/implementation-plan.md) |
 | Conventions | [../tourism-platform/docs/development-conventions.md](../tourism-platform/docs/development-conventions.md) |
@@ -30,8 +32,8 @@
    (`tourism-platform`, `tourism-backend`, `tourism-mobile`).
 2. В `workspace` обновляется submodule pointer на нужный SHA.
 3. Отдельный commit в `workspace` фиксирует совместимый набор версий.
-4. `git push` только по явной договорённости; foundation-сессии могут
-   оставлять изменения локально.
+4. `git push` только по явной просьбе. Lean CI не заменяет локальный
+   `./scripts/validate.sh`.
 
 Порядок merge: сначала child repos, затем workspace pointer.
 

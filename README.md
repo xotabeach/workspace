@@ -1,18 +1,24 @@
 # Crimea Travel Platform
 
-Crimea Travel Platform — greenfield-платформа для поиска туристических мест и
-планирования маршрутов. Первый контентный контур посвящён Республике Крым, но
-доменная модель поддерживает несколько стран и регионов:
-`Country -> Region -> Locality -> Place`.
+Crimea Travel Platform (CrimeaTrip) — greenfield-платформа для поиска
+туристических мест и планирования маршрутов. Первый контентный контур —
+Республика Крым; доменная модель: `Country -> Region -> Locality -> Place`.
 
 Проект не является официальным государственным приложением и не заявляет об
 официальном партнёрстве с государственными организациями.
 
 ## Статус
 
-Стадия foundation (Phase 0–1). Skeleton `tourism-backend` и `tourism-mobile`
-подключены как private GitLab submodules. Local Compose готов; production
-deploy ещё не реализован.
+Рабочий продукт, не foundation-skeleton. Каталог, auth (OTP/JWT), избранное,
+публикация маршрутов + SQLAdmin, профиль (тп/звания/лидерборд), отзывы,
+inbox + FCM (Android) — as-built. Test-backend задеплоен на отдельный host.
+
+**Дальше по плану:** Phase 8A (deterministic Route Builder). AI-planner
+(Gemini → локальная **Gemma 4** через Ollama) — задокументирован, код
+адаптера ещё не вшит. Живой лог: [progress.md](tourism-platform/docs/progress.md).
+
+Полный стек (local / test / home-lab Gemma):
+[stack.md](tourism-platform/docs/stack.md).
 
 ## Архитектура repositories
 
@@ -21,32 +27,36 @@ deploy ещё не реализован.
 ```text
 workspace/
 ├── docs/                 # индекс канонической документации
-├── tourism-platform/     # docs, Compose, будущие Helm/K8s
+├── tourism-platform/     # docs, Compose, deploy/test
 ├── tourism-backend/      # FastAPI modular monolith
 └── tourism-mobile/       # Flutter app
 ```
 
-| Repository | Назначение | Статус |
-| --- | --- | --- |
-| [`tourism-platform`](tourism-platform) | Docs, local Compose, infra assets | Foundation |
-| [`tourism-backend`](tourism-backend) | Python/FastAPI modular monolith | Foundation skeleton |
-| [`tourism-mobile`](tourism-mobile) | Flutter Android/iOS | Foundation skeleton |
+| Repository | Назначение |
+| --- | --- |
+| [`tourism-platform`](tourism-platform) | Docs, local Compose, test deploy |
+| [`tourism-backend`](tourism-backend) | Python 3.13 / FastAPI modular monolith |
+| [`tourism-mobile`](tourism-mobile) | Flutter Android/iOS |
 
-Дополнительные repositories не создаются. Kubernetes/Helm и продуктовая
-документация живут в `tourism-platform`.
+Дополнительные repositories не создаются. Kubernetes/Helm — позже в
+`tourism-platform`, не отдельным infra-repo.
 
-Backend module boundaries: `identity`, `users`, `geography`, `places`,
-`routes`, `route_builder`, `route_execution`, `favorites`, `subscriptions`,
-`media`.
+Backend modules (с API): `identity`, `geography`, `places`, `routes`,
+`favorites`, `support`, `notifications`, `admin`, `media`.
+Ещё stub: `route_builder`, `route_execution`, `subscriptions`.
 
 ## Технологическое направление
 
+Сводка: [stack.md](tourism-platform/docs/stack.md). Кратко:
+
 - Flutter, Riverpod, GoRouter, Dio.
 - Python 3.13, FastAPI, Pydantic v2, SQLAlchemy 2.
-- PostgreSQL/PostGIS, Redis, S3-compatible storage (MinIO local).
-- Provider-neutral `RoutingProvider`.
-- Kafka только после подтверждённого сценария (ADR-005).
-- Docker Compose локально; GitLab CI; Helm позже в `tourism-platform`.
+- PostgreSQL/PostGIS, Redis; MinIO и Mailpit — local DX.
+- Test host: Caddy + backend + PostGIS + Redis.
+- AI (план): `AIPlanningProvider` → mock / Gemini / **Ollama `gemma4:12b`**
+  + Qdrant RAG; не на test-VPS.
+- Kafka только после ADR-005. Helm — только при реальной multi-node нужде.
+- GitLab CI lean; локально `./scripts/validate.sh`.
 
 ## Начало работы
 
@@ -68,14 +78,19 @@ git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
 | --- | --- |
 | `make init` | Submodules + platform `.env` |
 | `make up` / `down` / `ps` / `logs` | Local infrastructure |
-| `make validate` | Безопасные проверки |
+| `make validate` | Проверки tourism-platform |
 | `make update` | Обновить submodule pointers (затем закоммитить) |
 | `make clean CONFIRM=yes` | Удалить volumes |
+
+Backend и mobile — в своих каталогах (`uv run tourism-backend`,
+`flutter run`). CI style/tests в lean-режиме не гоняются на GitLab:
+`cd tourism-backend && ./scripts/validate.sh` (и аналогично mobile).
 
 ## Документация
 
 Канон находится в `tourism-platform/docs/`. Индекс: [docs/README.md](docs/README.md).
 
+- [Стек (local / test / Gemma 4)](tourism-platform/docs/stack.md)
 - [Progress — что сделано / дальше](tourism-platform/docs/progress.md)
 - [Business logic](tourism-platform/docs/application-business-logic.md)
 - [Implementation plan](tourism-platform/docs/implementation-plan.md)
@@ -85,6 +100,7 @@ git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
 - [Repository strategy](tourism-platform/docs/repository-strategy.md)
 - [Local development](tourism-platform/docs/local-development.md)
 - [Architecture decisions](tourism-platform/docs/decisions)
+- [CI / runners](tourism-platform/docs/ci-and-runners.md)
 
 Legacy Android repository — только источник сценариев, код не переносится.
 
