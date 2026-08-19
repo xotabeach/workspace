@@ -15,8 +15,8 @@ inbox + FCM (Android) — as-built. Test-backend задеплоен на отд�
 
 **Дальше по плану:** enrichment slug/описаний и PostGIS quality gate для 1000
 локальных и 1000 серверных draft places, затем Phase 8A (deterministic Route
-Builder). Выбранный AI home lab — Windows LM Studio + **Gemma 4 26B A4B QAT**;
-connectivity adapter/probe уже есть, planning API ещё нет. Живой лог:
+Builder). Выбранный AI home lab — Windows LM Studio + **Unsloth Gemma 4 26B
+A4B it UD-IQ4_XS**; connectivity adapter/probe уже есть, planning API ещё нет. Живой лог:
 [progress.md](tourism-platform/docs/progress.md).
 
 Полный стек (local / test / home-lab Gemma):
@@ -55,8 +55,9 @@ Backend modules (с API): `identity`, `geography`, `places`, `routes`,
 - Python 3.13, FastAPI, Pydantic v2, SQLAlchemy 2.
 - PostgreSQL/PostGIS, Redis; MinIO и Mailpit — local DX.
 - Test host: Caddy + backend + PostGIS + Redis.
-- AI (план): `AIPlanningProvider` → mock / Gemini / **LM Studio Gemma 4 26B
-  A4B QAT**; Ollama остаётся альтернативным transport; Qdrant RAG — отдельно.
+- AI (план): `AIPlanningProvider` → mock / Gemini / **LM Studio Unsloth Gemma
+  4 26B A4B it UD-IQ4_XS**; Ollama остаётся альтернативным transport; Qdrant
+  RAG — отдельно.
 - Kafka только после ADR-005. Helm — только при реальной multi-node нужде.
 - GitLab CI lean; локально `./scripts/validate.sh`.
 
