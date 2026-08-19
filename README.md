@@ -13,9 +13,10 @@ Crimea Travel Platform (CrimeaTrip) — greenfield-платформа для п�
 публикация маршрутов + SQLAdmin, профиль (тп/звания/лидерборд), отзывы,
 inbox + FCM (Android) — as-built. Test-backend задеплоен на отдельный host.
 
-**Дальше по плану:** PostGIS quality gate для 1000 локальных и 1000 серверных
-draft places, затем Phase 8A (deterministic Route Builder). Выбранный AI home
-lab — Windows LM Studio + **Gemma 4 26B A4B QAT**; adapter ещё не вшит. Живой лог:
+**Дальше по плану:** enrichment slug/описаний и PostGIS quality gate для 1000
+локальных и 1000 серверных draft places, затем Phase 8A (deterministic Route
+Builder). Выбранный AI home lab — Windows LM Studio + **Gemma 4 26B A4B QAT**;
+connectivity adapter/probe уже есть, planning API ещё нет. Живой лог:
 [progress.md](tourism-platform/docs/progress.md).
 
 Полный стек (local / test / home-lab Gemma):
