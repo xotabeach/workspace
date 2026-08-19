@@ -13,9 +13,10 @@ Crimea Travel Platform (CrimeaTrip) — greenfield-платформа для п�
 публикация маршрутов + SQLAdmin, профиль (тп/звания/лидерборд), отзывы,
 inbox + FCM (Android) — as-built. Test-backend задеплоен на отдельный host.
 
-**Дальше по плану:** Phase 8A (deterministic Route Builder). AI-planner
-(Gemini → локальная **Gemma 4** через Ollama) — задокументирован, код
-адаптера ещё не вшит. Живой лог: [progress.md](tourism-platform/docs/progress.md).
+**Дальше по плану:** PostGIS quality gate для 1000 локальных и 1000 серверных
+draft places, затем Phase 8A (deterministic Route Builder). Выбранный AI home
+lab — Windows LM Studio + **Gemma 4 26B A4B QAT**; adapter ещё не вшит. Живой лог:
+[progress.md](tourism-platform/docs/progress.md).
 
 Полный стек (local / test / home-lab Gemma):
 [stack.md](tourism-platform/docs/stack.md).
@@ -53,8 +54,8 @@ Backend modules (с API): `identity`, `geography`, `places`, `routes`,
 - Python 3.13, FastAPI, Pydantic v2, SQLAlchemy 2.
 - PostgreSQL/PostGIS, Redis; MinIO и Mailpit — local DX.
 - Test host: Caddy + backend + PostGIS + Redis.
-- AI (план): `AIPlanningProvider` → mock / Gemini / **Ollama `gemma4:12b`**
-  + Qdrant RAG; не на test-VPS.
+- AI (план): `AIPlanningProvider` → mock / Gemini / **LM Studio Gemma 4 26B
+  A4B QAT**; Ollama остаётся альтернативным transport; Qdrant RAG — отдельно.
 - Kafka только после ADR-005. Helm — только при реальной multi-node нужде.
 - GitLab CI lean; локально `./scripts/validate.sh`.
 
@@ -100,6 +101,9 @@ Backend и mobile — в своих каталогах (`uv run tourism-backend`
 - [Repository strategy](tourism-platform/docs/repository-strategy.md)
 - [Local development](tourism-platform/docs/local-development.md)
 - [Architecture decisions](tourism-platform/docs/decisions)
+- [Windows LM Studio + Gemma 4 26B](tourism-platform/docs/ai-lm-studio-windows-gemma4.md)
+- [PostGIS bulk import 1000+](tourism-platform/docs/crimea-places-bulk-import-plan.md)
+- [AI-чат и генерация маршрута](tourism-platform/docs/ai-route-chat-mobile-implementation.md)
 - [CI / runners](tourism-platform/docs/ci-and-runners.md)
 
 Legacy Android repository — только источник сценариев, код не переносится.

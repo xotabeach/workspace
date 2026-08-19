@@ -13,6 +13,9 @@
 | Routes DB model (Phase 4) | [../tourism-platform/docs/data-model-routes.md](../tourism-platform/docs/data-model-routes.md) |
 | AI route planning architecture | [../tourism-platform/docs/ai-route-planning-architecture.md](../tourism-platform/docs/ai-route-planning-architecture.md) |
 | Self-hosted Gemma 4 home lab | [../tourism-platform/docs/ai-self-hosted-home-lab.md](../tourism-platform/docs/ai-self-hosted-home-lab.md) |
+| Windows LM Studio + Gemma 4 26B | [../tourism-platform/docs/ai-lm-studio-windows-gemma4.md](../tourism-platform/docs/ai-lm-studio-windows-gemma4.md) |
+| PostGIS bulk import 1000+ мест | [../tourism-platform/docs/crimea-places-bulk-import-plan.md](../tourism-platform/docs/crimea-places-bulk-import-plan.md) |
+| AI-чат и кнопка генерации | [../tourism-platform/docs/ai-route-chat-mobile-implementation.md](../tourism-platform/docs/ai-route-chat-mobile-implementation.md) |
 | Бизнес-логика | [../tourism-platform/docs/application-business-logic.md](../tourism-platform/docs/application-business-logic.md) |
 | План реализации | [../tourism-platform/docs/implementation-plan.md](../tourism-platform/docs/implementation-plan.md) |
 | Conventions | [../tourism-platform/docs/development-conventions.md](../tourism-platform/docs/development-conventions.md) |
