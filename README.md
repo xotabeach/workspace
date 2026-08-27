@@ -13,10 +13,11 @@ Crimea Travel Platform (CrimeaTrip) — greenfield-платформа для п�
 публикация маршрутов + SQLAdmin, профиль (тп/звания/лидерборд), отзывы,
 inbox + FCM (Android) — as-built. Test-backend задеплоен на отдельный host.
 
-**Дальше по плану:** enrichment slug/описаний и PostGIS quality gate для 1000
-локальных и 1000 серверных draft places, затем Phase 8A (deterministic Route
-Builder). Выбранный AI home lab — Windows LM Studio + **Unsloth Gemma 4 26B
-A4B it UD-IQ4_XS**; connectivity adapter/probe уже есть, planning API ещё нет. Живой лог:
+**Дальше по плану:** завершение Phase 8B AI-чата и backend-части рекомендаций,
+затем enrichment slug/описаний и PostGIS quality gate для 1000
+локальных и 1000 серверных draft places. Выбранный AI home lab — Windows LM
+Studio + **Unsloth Gemma 4 26B A4B it UD-IQ4_XS**; Phase 8B planning sessions
+и deterministic Route Builder уже подключены, работа продолжается. Живой лог:
 [progress.md](tourism-platform/docs/progress.md).
 
 Полный стек (local / test / home-lab Gemma):
@@ -55,9 +56,9 @@ Backend modules (с API): `identity`, `geography`, `places`, `routes`,
 - Python 3.13, FastAPI, Pydantic v2, SQLAlchemy 2.
 - PostgreSQL/PostGIS, Redis; MinIO и Mailpit — local DX.
 - Test host: Caddy + backend + PostGIS + Redis.
-- AI (план): `AIPlanningProvider` → mock / Gemini / **LM Studio Unsloth Gemma
-  4 26B A4B it UD-IQ4_XS**; Ollama остаётся альтернативным transport; Qdrant
-  RAG — отдельно.
+- AI: `AIPlanningProvider` → mock / Gemini / **LM Studio Unsloth Gemma 4 26B
+  A4B it UD-IQ4_XS**; Ollama остаётся альтернативным transport; Qdrant RAG —
+  отдельно.
 - Kafka только после ADR-005. Helm — только при реальной multi-node нужде.
 - GitLab CI lean; локально `./scripts/validate.sh`.
 
@@ -94,7 +95,7 @@ Backend и mobile — в своих каталогах (`uv run tourism-backend`
 Канон находится в `tourism-platform/docs/`. Индекс: [docs/README.md](docs/README.md).
 
 - [Стек (local / test / Gemma 4)](tourism-platform/docs/stack.md)
-- [Progress — что сделано / дальше](tourism-platform/docs/progress.md)
+- [Progress — что сделано / дальше](tourism-platform/docs/progress.md) (обновлено 2026-08-27)
 - [Business logic](tourism-platform/docs/application-business-logic.md)
 - [Implementation plan](tourism-platform/docs/implementation-plan.md)
 - [Development conventions](tourism-platform/docs/development-conventions.md)
