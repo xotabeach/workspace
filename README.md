@@ -13,11 +13,10 @@ Crimea Travel Platform (CrimeaTrip) — greenfield-платформа для п�
 публикация маршрутов + SQLAdmin, профиль (тп/звания/лидерборд), отзывы,
 inbox + FCM (Android) — as-built. Test-backend задеплоен на отдельный host.
 
-**Дальше по плану:** завершение Phase 8B AI-чата и backend-части рекомендаций,
-затем enrichment slug/описаний и PostGIS quality gate для 1000
-локальных и 1000 серверных draft places. Выбранный AI home lab — Windows LM
-Studio + **Unsloth Gemma 4 26B A4B it UD-IQ4_XS**; Phase 8B planning sessions
-и deterministic Route Builder уже подключены, работа продолжается. Живой лог:
+**Дальше по плану:** server-side 2ГИС Routing API, route quality gate, карта и
+полное прохождение маршрута; затем backend-рекомендации с использованием
+preferences, diversity и exploration. Deterministic Route Builder и backend
+route-execution v0 уже подключены, работа продолжается. Живой лог:
 [progress.md](tourism-platform/docs/progress.md).
 
 Полный стек (local / test / home-lab Gemma):
@@ -45,8 +44,9 @@ workspace/
 `tourism-platform`, не отдельным infra-repo.
 
 Backend modules (с API): `identity`, `geography`, `places`, `routes`,
-`favorites`, `support`, `notifications`, `admin`, `media`.
-Ещё stub: `route_builder`, `route_execution`, `subscriptions`.
+`favorites`, `support`, `notifications`, `admin`, `media`, `route_builder`,
+`route_execution`, `subscriptions`. Routing пока synthetic/stub; mobile
+execution и recommendation backend ещё не завершены.
 
 ## Технологическое направление
 
@@ -95,7 +95,9 @@ Backend и mobile — в своих каталогах (`uv run tourism-backend`
 Канон находится в `tourism-platform/docs/`. Индекс: [docs/README.md](docs/README.md).
 
 - [Стек (local / test / Gemma 4)](tourism-platform/docs/stack.md)
-- [Progress — что сделано / дальше](tourism-platform/docs/progress.md) (обновлено 2026-08-27)
+- [Progress — что сделано / дальше](tourism-platform/docs/progress.md) (обновлено 2026-08-28)
+- [Единый implementation blueprint](tourism-platform/docs/implementation-blueprint-2026-08.md)
+- [Оценка готовности плана](tourism-platform/docs/implementation-readiness-review-2026-08-28.md)
 - [Business logic](tourism-platform/docs/application-business-logic.md)
 - [Implementation plan](tourism-platform/docs/implementation-plan.md)
 - [Development conventions](tourism-platform/docs/development-conventions.md)

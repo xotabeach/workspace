@@ -9,6 +9,8 @@
 | --- | --- |
 | **Стек (local / test / Gemma 4)** | [../tourism-platform/docs/stack.md](../tourism-platform/docs/stack.md) |
 | **Progress (что сделано / дальше)** | [../tourism-platform/docs/progress.md](../tourism-platform/docs/progress.md) |
+| **Единый implementation blueprint** | [../tourism-platform/docs/implementation-blueprint-2026-08.md](../tourism-platform/docs/implementation-blueprint-2026-08.md) |
+| **Оценка готовности плана** | [../tourism-platform/docs/implementation-readiness-review-2026-08-28.md](../tourism-platform/docs/implementation-readiness-review-2026-08-28.md) |
 | Geography/places DB model | [../tourism-platform/docs/data-model-geography-places.md](../tourism-platform/docs/data-model-geography-places.md) |
 | Routes DB model (Phase 4) | [../tourism-platform/docs/data-model-routes.md](../tourism-platform/docs/data-model-routes.md) |
 | AI route planning architecture | [../tourism-platform/docs/ai-route-planning-architecture.md](../tourism-platform/docs/ai-route-planning-architecture.md) |
