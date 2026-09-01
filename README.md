@@ -8,6 +8,11 @@
 
 <!-- MEDIA:HERO -->
 
+<p align="center">
+  <img src="docs/media/hero-welcome.jpg" width="220" alt="Экран приветствия" />
+  <img src="docs/media/auth-flow.gif" width="220" alt="Регистрация: имя, телефон, код подтверждения" />
+</p>
+
 ---
 
 ## Зачем это нужно
@@ -31,6 +36,11 @@
 
 <!-- MEDIA:CATALOG -->
 
+<p align="center">
+  <img src="docs/media/catalog-home.jpg" width="220" alt="Главный экран: топ путешественников и каталог" />
+  <img src="docs/media/catalog-deck.jpg" width="220" alt="Свайп-подбор маршрутов" />
+</p>
+
 ### Три способа получить маршрут
 
 | Способ | Как работает | Кому |
@@ -41,6 +51,10 @@
 
 <!-- MEDIA:MATCH -->
 
+<p align="center">
+  <img src="docs/media/match-ai-chat.jpg" width="240" alt="Диалог с Тревел Агентом" />
+</p>
+
 ### Прохождение маршрута
 
 Пошаговое прохождение с картой, отметкой точек, офлайн-режимом и начислением баллов.
@@ -49,12 +63,21 @@
 
 <!-- MEDIA:EXECUTION -->
 
+<p align="center">
+  <img src="docs/media/execution-progress.jpg" width="240" alt="Прохождение маршрута с картой и прогрессом" />
+</p>
+
 ### Профиль и социальное
 
 Звания за пройденные маршруты, достижения, статистика, лидерборд, отзывы с фото,
 избранное, публикация своих маршрутов с модерацией.
 
 <!-- MEDIA:PROFILE -->
+
+<p align="center">
+  <img src="docs/media/profile-overview.jpg" width="220" alt="Профиль: звание и статистика" />
+  <img src="docs/media/profile-achievements.jpg" width="220" alt="Список достижений" />
+</p>
 
 ---
 
