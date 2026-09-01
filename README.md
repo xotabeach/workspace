@@ -1,35 +1,94 @@
-# Crimea Travel Platform
+# КРЫМТРИП · Crimea Travel Platform
 
-Crimea Travel Platform (CrimeaTrip) — greenfield-платформа для поиска
-туристических мест и планирования маршрутов. Первый контентный контур —
-Республика Крым; доменная модель: `Country -> Region -> Locality -> Place`.
+Мобильное приложение и платформа для планирования поездок по Крыму: каталог мест,
+готовые и сгенерированные маршруты, прохождение маршрута с картой и офлайном.
 
 Проект не является официальным государственным приложением и не заявляет об
 официальном партнёрстве с государственными организациями.
 
-## Статус
+<!-- MEDIA:HERO -->
 
-Рабочий продукт, не foundation-skeleton. Каталог, auth (OTP/JWT), избранное,
-публикация маршрутов + SQLAdmin, профиль (тп/звания/лидерборд), отзывы,
-inbox + FCM (Android) — as-built. Test-backend задеплоен на отдельный host.
+---
 
-**Дальше по плану:** server-side 2ГИС Routing API, route quality gate, карта и
-полное прохождение маршрута; затем backend-рекомендации с использованием
-preferences, diversity и exploration. Deterministic Route Builder и backend
-route-execution v0 уже подключены, работа продолжается. Живой лог:
-[progress.md](tourism-platform/docs/progress.md).
+## Зачем это нужно
 
-Полный стек (local / test / home-lab Gemma):
-[stack.md](tourism-platform/docs/stack.md).
+Информация о туристических местах Крыма разбросана и быстро устаревает: режим работы,
+сезонные ограничения, состояние троп, где вход и есть ли он вообще. У природных
+и горных локаций часто нет ни точного адреса, ни одного входа — их несколько,
+и с разных сторон. Плюс в горах пропадает связь ровно тогда, когда маршрут нужнее всего.
 
-## Архитектура repositories
+Собрать из этого выполнимый маршрут — с учётом того, сколько у тебя времени, едешь ли
+ты на машине, есть ли с тобой дети — руками тяжело. КРЫМТРИП делает это за вас
+и, что важнее, **показывает, почему предложил именно это**.
 
-Этот repository (`workspace`) — Git superproject:
+## Что умеет
+
+### Каталог и места
+
+Места с категориями, сезонностью, расписанием, несколькими входами и предупреждениями
+о безопасности. Данные — PostGIS, поэтому «рядом» — это настоящая география,
+а не совпадение по названию.
+
+<!-- MEDIA:CATALOG -->
+
+### Три способа получить маршрут
+
+| Способ | Как работает | Кому |
+| --- | --- | --- |
+| **Готовые маршруты** | Редакционные и пользовательские, прошедшие модерацию | Хочу быстро |
+| **Подбор по параметрам** | Форма: город, время, интересы, темп, транспорт → детерминированный скоринг каталога | Знаю, чего хочу |
+| **Тревел Агент (ИИ)** | Диалог на русском, уточняющие вопросы, генерация маршрута под ответы | Не знаю, с чего начать |
+
+<!-- MEDIA:MATCH -->
+
+### Прохождение маршрута
+
+Пошаговое прохождение с картой, отметкой точек, офлайн-режимом и начислением баллов.
+Маршрут фиксируется снапшотом на старте — то есть отчёт о прохождении нельзя
+«подкрутить» задним числом, отредактировав маршрут.
+
+<!-- MEDIA:EXECUTION -->
+
+### Профиль и социальное
+
+Звания за пройденные маршруты, достижения, статистика, лидерборд, отзывы с фото,
+избранное, публикация своих маршрутов с модерацией.
+
+<!-- MEDIA:PROFILE -->
+
+---
+
+## Чем отличается
+
+**Маршрут объясняет сам себя.** Подбор возвращает не только результат, но и причины:
+«старт рядом с Ялтой», «длительность совпадает», «интересы: горы, фото». Пользователь
+видит логику, а не чёрный ящик.
+
+**Данные важнее полноты.** Принцип проекта: лучше меньше мест, но с проверенным
+расписанием и предупреждениями, чем большой каталог, которому нельзя доверять.
+Источник и свежесть критичных данных видны и проверяемы.
+
+**Офлайн там, где он нужен.** Прохождение маршрута переживает пропажу связи —
+именно в горах, где она пропадает.
+
+**Сменные провайдеры.** Роутинг, ИИ и геоданные подключены через контракты
+(`RoutingProvider`, `AIPlanningProvider`, `TspProvider`, `DistanceMatrixProvider`),
+у каждого есть заглушка. Смена поставщика — это конфиг, а не переписывание.
+ИИ переключается между локальной моделью и облачной прямо из админки, без редеплоя.
+
+**Не привязан к Крыму.** Модель `Country → Region → Locality → Place` рассчитана
+на несколько регионов; Крым — первый контур, а не единственный возможный.
+
+---
+
+## Как устроено
+
+Git superproject с тремя submodule:
 
 ```text
 workspace/
-├── docs/                 # индекс канонической документации
-├── tourism-platform/     # docs, Compose, deploy/test
+├── docs/                 # индекс документации
+├── tourism-platform/     # docs, Compose, deploy
 ├── tourism-backend/      # FastAPI modular monolith
 └── tourism-mobile/       # Flutter app
 ```
@@ -38,41 +97,46 @@ workspace/
 | --- | --- |
 | [`tourism-platform`](tourism-platform) | Docs, local Compose, test deploy |
 | [`tourism-backend`](tourism-backend) | Python 3.13 / FastAPI modular monolith |
-| [`tourism-mobile`](tourism-mobile) | Flutter Android/iOS |
+| [`tourism-mobile`](tourism-mobile) | Flutter Android / iOS |
 
-Дополнительные repositories не создаются. Kubernetes/Helm — позже в
-`tourism-platform`, не отдельным infra-repo.
+**Мобильное:** Flutter, Riverpod, GoRouter, Dio.
+**Бэкенд:** Python 3.13, FastAPI, Pydantic v2, SQLAlchemy 2, Alembic.
+**Данные:** PostgreSQL + PostGIS (+ pgvector), Redis.
+**Инфраструктура:** Docker Compose, Caddy на тестовом контуре.
+**ИИ:** сменный `AIPlanningProvider` — mock / Gemini / LM Studio (Gemma 4 26B).
 
-Backend modules (с API): `identity`, `geography`, `places`, `routes`,
-`favorites`, `support`, `notifications`, `admin`, `media`, `route_builder`,
-`route_execution`, `subscriptions`. Routing пока synthetic/stub; mobile
-execution и recommendation backend ещё не завершены.
+Модули бэкенда: `identity`, `geography`, `places`, `routes`, `favorites`, `support`,
+`notifications`, `admin`, `media`, `route_builder`, `route_execution`, `subscriptions`,
+`recommendations`, `knowledge`, `content`, `runtime_config`.
 
-## Технологическое направление
+Подробнее: [стек](tourism-platform/docs/stack.md) ·
+[доменная модель](tourism-platform/docs/domain-model.md) ·
+[архитектурные решения](tourism-platform/docs/decisions)
 
-Сводка: [stack.md](tourism-platform/docs/stack.md). Кратко:
+---
 
-- Flutter, Riverpod, GoRouter, Dio.
-- Python 3.13, FastAPI, Pydantic v2, SQLAlchemy 2.
-- PostgreSQL/PostGIS, Redis; MinIO и Mailpit — local DX.
-- Test host: Caddy + backend + PostGIS + Redis.
-- AI: `AIPlanningProvider` → mock / Gemini / **LM Studio Unsloth Gemma 4 26B
-  A4B it UD-IQ4_XS**; Ollama остаётся альтернативным transport; Qdrant RAG —
-  отдельно.
-- Kafka только после ADR-005. Helm — только при реальной multi-node нужде.
-- GitLab CI lean; локально `./scripts/validate.sh`.
+## Статус
 
-## Начало работы
+Рабочий продукт, не скелет. Каталог, авторизация (OTP/JWT), избранное, публикация
+маршрутов, админ-панель, профиль со званиями и лидербордом, отзывы, уведомления
+(inbox + FCM), прохождение маршрута, подбор, ИИ-чат — работают. Тестовый контур
+задеплоен на отдельный хост.
+
+В работе: улучшение алгоритмов подбора, статьи/блог, переработка RAG.
+Живой лог: [progress.md](tourism-platform/docs/progress.md).
+
+---
+
+## Запуск
 
 ```bash
-git clone --recurse-submodules \
-  https://gitlab.com/travel-platform2/workspace.git
+git clone --recurse-submodules https://gitlab.com/travel-platform2/workspace.git
 cd workspace
 make init
 make up
 ```
 
-Для SSH вместо HTTPS локально:
+Для SSH вместо HTTPS:
 
 ```bash
 git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
@@ -81,46 +145,38 @@ git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
 | Команда | Назначение |
 | --- | --- |
 | `make init` | Submodules + platform `.env` |
-| `make up` / `down` / `ps` / `logs` | Local infrastructure |
+| `make up` / `down` / `ps` / `logs` | Локальная инфраструктура |
 | `make validate` | Проверки tourism-platform |
-| `make update` | Обновить submodule pointers (затем закоммитить) |
+| `make update` | Обновить submodule pointers |
 | `make clean CONFIRM=yes` | Удалить volumes |
 
-Backend и mobile — в своих каталогах (`uv run tourism-backend`,
-`flutter run`). CI style/tests в lean-режиме не гоняются на GitLab:
-`cd tourism-backend && ./scripts/validate.sh` (и аналогично mobile).
+Бэкенд и мобильное — в своих каталогах:
+
+```bash
+cd tourism-backend && uv run tourism-backend      # API
+cd tourism-mobile  && flutter run                 # приложение
+```
+
+Проверки перед коммитом: `cd tourism-backend && ./scripts/validate.sh`,
+`cd tourism-mobile && flutter analyze && flutter test`.
+
+---
 
 ## Документация
 
-Канон находится в `tourism-platform/docs/`. Индекс: [docs/README.md](docs/README.md).
+Канон — в `tourism-platform/docs/`. Индекс: [docs/README.md](docs/README.md).
 
-- [Стек (local / test / Gemma 4)](tourism-platform/docs/stack.md)
-- [Progress — что сделано / дальше](tourism-platform/docs/progress.md) (обновлено 2026-08-28)
-- [Единый implementation blueprint](tourism-platform/docs/implementation-blueprint-2026-08.md)
-- [Оценка готовности плана](tourism-platform/docs/implementation-readiness-review-2026-08-28.md)
-- [Business logic](tourism-platform/docs/application-business-logic.md)
-- [Implementation plan](tourism-platform/docs/implementation-plan.md)
-- [Development conventions](tourism-platform/docs/development-conventions.md)
-- [Product vision](tourism-platform/docs/product-vision.md)
-- [Domain model](tourism-platform/docs/domain-model.md)
-- [Repository strategy](tourism-platform/docs/repository-strategy.md)
-- [Local development](tourism-platform/docs/local-development.md)
-- [Architecture decisions](tourism-platform/docs/decisions)
-- [Windows LM Studio + Gemma 4 26B](tourism-platform/docs/ai-lm-studio-windows-gemma4.md)
-- [PostGIS bulk import 1000+](tourism-platform/docs/crimea-places-bulk-import-plan.md)
-- [AI-чат и генерация маршрута](tourism-platform/docs/ai-route-chat-mobile-implementation.md)
-- [CI / runners](tourism-platform/docs/ci-and-runners.md)
+- [Видение продукта](tourism-platform/docs/product-vision.md)
+- [Бизнес-логика](tourism-platform/docs/application-business-logic.md)
+- [Доменная модель](tourism-platform/docs/domain-model.md)
+- [Стек](tourism-platform/docs/stack.md)
+- [Progress — что сделано и что дальше](tourism-platform/docs/progress.md)
+- [Архитектурные решения (ADR)](tourism-platform/docs/decisions)
+- [Локальная разработка](tourism-platform/docs/local-development.md)
+- [Соглашения разработки](tourism-platform/docs/development-conventions.md)
 
-Legacy Android repository — только источник сценариев, код не переносится.
+---
 
 ## Видимость
 
-```text
-gitlab.com/travel-platform2/
-├── workspace/
-├── tourism-platform/
-├── tourism-backend/
-└── tourism-mobile/
-```
-
-Источник истины — GitLab. GitHub mirror (опционально) — только public showcase.
+Источник истины — GitLab (`gitlab.com/travel-platform2/`), GitHub — публичное зеркало.
