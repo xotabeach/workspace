@@ -3,6 +3,8 @@
 Краткий порядок работы в superproject. Полные conventions:
 [tourism-platform/docs/development-conventions.md](../tourism-platform/docs/development-conventions.md).
 Стек: [tourism-platform/docs/stack.md](../tourism-platform/docs/stack.md).
+Договорённости, ловушки и текущее состояние работ —
+[agent-handoff.md](agent-handoff.md).
 
 ## Локальный день разработчика
 
