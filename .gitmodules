@@ -7,3 +7,6 @@
 [submodule "tourism-mobile"]
 	path = tourism-mobile
 	url = https://gitlab.com/travel-platform2/tourism-mobile.git
+[submodule "tourism-landing"]
+	path = tourism-landing
+	url = git@gitlab.com:travel-platform2/tourism-landing.git
