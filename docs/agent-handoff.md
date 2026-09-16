@@ -104,6 +104,13 @@ file Debian bullseye-security — `apt-get update` падает, `&&`-цепоч
 `apt-get update` (добавлено 2026-09-08) — если снова всплывёт похожая ошибка
 про expired Release file, смотреть сюда раньше, чем в диф последнего коммита.
 
+**APK job ограничен 2 ГБ памяти.** Self-hosted runner запускает контейнер с
+`memory=2g`. Если `android/gradle.properties` разрешает Gradle больше этого,
+daemon исчезает без Java OOM stack trace: его убивает cgroup. Рабочая
+конфигурация с 2026-09-17 — heap 1024 МБ, один worker, без parallel/VFS watch,
+Kotlin compiler in-process. Не повышать `-Xmx` без одновременного изменения
+лимита runner и оценки влияния на production-хост.
+
 **История изменений проверяется тестами.** `lib/features/settings/domain/changelog.dart`
 живёт в приложении, а не приходит с сервера — это осознанное решение: запись
 описывает конкретную сборку. Тесты требуют: 20–300 символов на запись, никаких
@@ -132,6 +139,23 @@ file Debian bullseye-security — `apt-get update` падает, `&&`-цепоч
 `ai_chat_session_ttl_hours` (закрывается лениво при следующем заходе).
 
 ## Текущее состояние
+
+### Ближайшая инфраструктурная реализация — declarative deploy без Kubernetes
+
+- Убрать нынешнюю ручную цепочку GitLab variables → два shell-allowlist →
+  серверный `.env` → Compose `environment`. Она уже приводила к ситуации,
+  когда секрет был задан в GitLab и записан на сервер, но не попадал в
+  контейнер.
+- Целевой вариант для одного Docker-хоста: Docker Compose + production overlay,
+  Ansible (`community.docker.docker_compose_v2`) для идемпотентного deploy и
+  SOPS/age для зашифрованных production values. Секреты выдавать сервисам через
+  Compose secrets и `/run/secrets/*`, добавив в приложения поддержку `*_FILE`.
+- Один playbook должен выполнять доставку декларативной конфигурации, pull,
+  миграции, `compose config`, recreate, health-check и rollback. После его
+  внедрения удалить дублирующие `SYNCED_*` списки и ручное редактирование
+  серверного `.env`.
+- Не переходить ради этого на Kubernetes. Kamal оставить запасным вариантом;
+  Nomad/Vault и Swarm для нынешнего одного хоста избыточны.
 
 - **Commit/push — 2026-09-09, по запросу владельца:** backend `71fe130`
   (диалог по цели + RAG), предыдущий `ece37d5` (поиск справки и MiniLM);
