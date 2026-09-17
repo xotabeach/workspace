@@ -104,12 +104,12 @@ file Debian bullseye-security — `apt-get update` падает, `&&`-цепоч
 `apt-get update` (добавлено 2026-09-08) — если снова всплывёт похожая ошибка
 про expired Release file, смотреть сюда раньше, чем в диф последнего коммита.
 
-**APK job ограничен 2 ГБ памяти.** Self-hosted runner запускает контейнер с
-`memory=2g`. Если `android/gradle.properties` разрешает Gradle больше этого,
-daemon исчезает без Java OOM stack trace: его убивает cgroup. Рабочая
-конфигурация с 2026-09-17 — heap 1024 МБ, один worker, без parallel/VFS watch,
-Kotlin compiler in-process. Не повышать `-Xmx` без одновременного изменения
-лимита runner и оценки влияния на production-хост.
+**APK больше не собирается в GitLab CI.** Self-hosted runner ограничен 2 ГБ и
+живёт на production-хосте; даже Gradle с heap 1024 МБ вместе с Flutter/AAPT2
+выходил за cgroup limit. С 2026-09-17 production APK собирается и публикуется
+локально через `tourism-mobile/scripts/publish-production-apk.sh`. Скрипт
+использует отдельный SSH-ключ с APK-only forced command. Не возвращать тяжёлую
+Android-сборку на этот runner; при необходимости вынести её на отдельную VM.
 
 **История изменений проверяется тестами.** `lib/features/settings/domain/changelog.dart`
 живёт в приложении, а не приходит с сервера — это осознанное решение: запись
@@ -139,6 +139,25 @@ Kotlin compiler in-process. Не повышать `-Xmx` без одноврем
 `ai_chat_session_ttl_hours` (закрывается лениво при следующем заходе).
 
 ## Текущее состояние
+
+### Релиз 0.2.5 — 2026-09-17
+
+- Mobile `de41dbe`: версия `0.2.5+24`, дата выпуска и восемь записей changelog.
+  Включены свободная стартовая точка (город/посёлок/место или автовыбор),
+  расширение поиска рядом с малым населённым пунктом, общий beta-доступ к ИИ,
+  лимиты 5 генераций/30 ответов в сутки, новая быстрая модель, SMS-коды,
+  блокировка фиктивной покупки Тревел+ и улучшения поиска справки/скачивания APK.
+- APK собран локально из `de41dbe`, подписан и опубликован через APK-only
+  forced command. `latest` и архив `0.2.5` отвечают `200`, имеют MIME Android
+  package и одинаковый размер 69 468 769 байт.
+- APK jobs удалены из lean/full GitLab CI. Каноничная команда выпуска —
+  `tourism-mobile/scripts/publish-production-apk.sh`; `--dry-run` проверяет
+  локальную подпись, production URL и SSH-настройки без сборки и загрузки.
+- Backend-инкремент релиза: `9f15074`/`733dda8`/`bc605b1` (география и подбор),
+  `c7383eb` (SMS Aero), `e9dce22` (beta-доступ, лимиты, модель и Travel+).
+  Seed содержит новые точки и маршруты Фороса/Симеиза, но read-only проверка
+  production API не нашла опубликованных маршрутов. Не заявлять их доступными,
+  пока данные не пройдут проверку и отдельный импорт.
 
 ### Ближайшая инфраструктурная реализация — declarative deploy без Kubernetes
 
