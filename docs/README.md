@@ -1,45 +1,19 @@
 # Документация workspace
 
-Канонические документы живут в submodule `tourism-platform/docs/`, чтобы не
-дублировать product/architecture content.
+`workspace` фиксирует совместимые версии четырёх submodules. Общая продуктовая и
+архитектурная документация находится в `tourism-platform/docs/`; здесь —
+публичный индекс документов, которые входят в Git.
 
-## Основные документы
-
-| Документ | Путь |
+| Тема | Документы |
 | --- | --- |
-| **Стек (local / test / Gemma 4)** | [../tourism-platform/docs/stack.md](../tourism-platform/docs/stack.md) |
-| **Progress (что сделано / дальше)** | [../tourism-platform/docs/progress.md](../tourism-platform/docs/progress.md) |
-| **Единый implementation blueprint** | [../tourism-platform/docs/implementation-blueprint-2026-08.md](../tourism-platform/docs/implementation-blueprint-2026-08.md) |
-| **Оценка готовности плана** | [../tourism-platform/docs/implementation-readiness-review-2026-08-28.md](../tourism-platform/docs/implementation-readiness-review-2026-08-28.md) |
-| Geography/places DB model | [../tourism-platform/docs/data-model-geography-places.md](../tourism-platform/docs/data-model-geography-places.md) |
-| Routes DB model (Phase 4) | [../tourism-platform/docs/data-model-routes.md](../tourism-platform/docs/data-model-routes.md) |
-| AI route planning architecture | [../tourism-platform/docs/ai-route-planning-architecture.md](../tourism-platform/docs/ai-route-planning-architecture.md) |
-| Self-hosted Gemma 4 home lab | [../tourism-platform/docs/ai-self-hosted-home-lab.md](../tourism-platform/docs/ai-self-hosted-home-lab.md) |
-| Windows LM Studio + Gemma 4 26B | [../tourism-platform/docs/ai-lm-studio-windows-gemma4.md](../tourism-platform/docs/ai-lm-studio-windows-gemma4.md) |
-| PostGIS bulk import 1000+ мест | [../tourism-platform/docs/crimea-places-bulk-import-plan.md](../tourism-platform/docs/crimea-places-bulk-import-plan.md) |
-| AI-чат и кнопка генерации | [../tourism-platform/docs/ai-route-chat-mobile-implementation.md](../tourism-platform/docs/ai-route-chat-mobile-implementation.md) |
-| Бизнес-логика | [../tourism-platform/docs/application-business-logic.md](../tourism-platform/docs/application-business-logic.md) |
-| План реализации | [../tourism-platform/docs/implementation-plan.md](../tourism-platform/docs/implementation-plan.md) |
-| Conventions | [../tourism-platform/docs/development-conventions.md](../tourism-platform/docs/development-conventions.md) |
-| Development environment (DX) | [../tourism-platform/docs/development-environment.md](../tourism-platform/docs/development-environment.md) |
-| **Security baseline** | [../tourism-platform/docs/security/security-baseline.md](../tourism-platform/docs/security/security-baseline.md) |
-| Python code style | [../tourism-platform/docs/python-code-style.md](../tourism-platform/docs/python-code-style.md) |
-| Flutter code style | [../tourism-platform/docs/flutter-code-style.md](../tourism-platform/docs/flutter-code-style.md) |
-| Flutter app architecture (Phase 5) | [../tourism-platform/docs/flutter-app-architecture.md](../tourism-platform/docs/flutter-app-architecture.md) |
-| Phase/screens map (для дизайна) | [../tourism-platform/docs/diagrams/phase-and-screens-map.md](../tourism-platform/docs/diagrams/phase-and-screens-map.md) |
-| Domain model | [../tourism-platform/docs/domain-model.md](../tourism-platform/docs/domain-model.md) |
-| Local development | [../tourism-platform/docs/local-development.md](../tourism-platform/docs/local-development.md) |
-| Repository strategy | [../tourism-platform/docs/repository-strategy.md](../tourism-platform/docs/repository-strategy.md) |
+| Текущие возможности | [Статус](../tourism-platform/docs/current-status.md), [README backend](../tourism-backend/README.md), [README mobile](../tourism-mobile/README.md), [README landing](../tourism-landing/README.md) |
+| Продукт и домен | [Видение](../tourism-platform/docs/product-vision.md), [бизнес-логика](../tourism-platform/docs/application-business-logic.md), [доменная модель](../tourism-platform/docs/domain-model.md) |
+| Архитектура | [Системный контекст](../tourism-platform/docs/system-context.md), [стек](../tourism-platform/docs/stack.md), [ADR](../tourism-platform/docs/decisions), [стратегия репозиториев](../tourism-platform/docs/repository-strategy.md) |
+| Данные | [География и места](../tourism-platform/docs/data-model-geography-places.md), [маршруты](../tourism-platform/docs/data-model-routes.md) |
+| Разработка | [Локальный запуск](../tourism-platform/docs/local-development.md), [окружение](../tourism-platform/docs/development-environment.md), [соглашения](../tourism-platform/docs/development-conventions.md) |
+| Python | [Стиль](../tourism-platform/docs/python-code-style.md), [тесты](../tourism-platform/docs/python-testing-guide.md) |
+| Flutter | [Архитектура](../tourism-platform/docs/flutter-app-architecture.md), [дизайн-система](../tourism-platform/docs/flutter-design-system.md), [стиль](../tourism-platform/docs/flutter-code-style.md), [тесты](../tourism-platform/docs/flutter-testing-guide.md) |
 
-## Development workflow (submodules)
-
-1. Изменения коммитятся и мержатся в дочернем repository
-   (`tourism-platform`, `tourism-backend`, `tourism-mobile`).
-2. В `workspace` обновляется submodule pointer на нужный SHA.
-3. Отдельный commit в `workspace` фиксирует совместимый набор версий.
-4. `git push` только по явной просьбе. Lean CI не заменяет локальный
-   `./scripts/validate.sh`.
-
-Порядок merge: сначала child repos, затем workspace pointer.
-
-См. [development-conventions.md](../tourism-platform/docs/development-conventions.md).
+Изменения в дочерних репозиториях сначала проходят review и merge там. Затем
+`workspace` обновляет submodule pointers и фиксирует совместимый набор SHA.
+Основная площадка разработки — GitLab; GitHub служит публичным зеркалом.
