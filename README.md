@@ -1,7 +1,7 @@
 # КРЫМТРИП · Crimea Travel Platform
 
-Мобильное приложение и платформа для планирования поездок по Крыму: каталог мест,
-готовые и сгенерированные маршруты, прохождение маршрута с картой и офлайном.
+Мобильное приложение и платформа для планирования поездок по Крыму: каталог мест
+и статей, готовые и сгенерированные маршруты, прохождение с картой и офлайн-снимком.
 
 Проект не является официальным государственным приложением и не заявляет об
 официальном партнёрстве с государственными организациями.
@@ -9,8 +9,8 @@
 <!-- MEDIA:HERO -->
 
 <p align="center">
-  <img src="docs/media/hero-welcome.jpg" width="220" alt="Экран приветствия" />
-  <img src="docs/media/auth-flow.gif" width="220" alt="Регистрация: имя, телефон, код подтверждения" />
+  <img src="docs/media/welcome-current.jpg" width="220" alt="Заставка КРЫМТРИП" />
+  <img src="docs/media/home-current.jpg" width="220" alt="Главный экран с активным маршрутом и подборками" />
 </p>
 
 ---
@@ -28,17 +28,17 @@
 
 ## Что умеет
 
-### Каталог и места
+### Каталог и маршруты
 
 Места с категориями, сезонностью, расписанием, несколькими входами и предупреждениями
 о безопасности. Данные — PostGIS, поэтому «рядом» — это настоящая география,
-а не совпадение по названию.
+а не совпадение по названию. В каталоге маршруты можно искать и фильтровать
+по тематике; карточка показывает транспорт, сложность и длительность.
 
 <!-- MEDIA:CATALOG -->
 
 <p align="center">
-  <img src="docs/media/catalog-home.jpg" width="220" alt="Главный экран: топ путешественников и каталог" />
-  <img src="docs/media/catalog-deck.jpg" width="220" alt="Свайп-подбор маршрутов" />
+  <img src="docs/media/routes-catalog-current.jpg" width="220" alt="Каталог маршрутов с фильтрами и карточкой" />
 </p>
 
 ### Три способа получить маршрут
@@ -52,19 +52,28 @@
 <!-- MEDIA:MATCH -->
 
 <p align="center">
-  <img src="docs/media/match-ai-chat.jpg" width="240" alt="Диалог с Тревел Агентом" />
+  <img src="docs/media/route-builder-current.jpg" width="220" alt="Подбор маршрута по параметрам" />
+  <img src="docs/media/ai-chat-current.jpg" width="220" alt="Тревел Агент предлагает варианты маршрута в чате" />
 </p>
 
 ### Прохождение маршрута
 
-Пошаговое прохождение с картой, отметкой точек, офлайн-режимом и начислением баллов.
+Прохождение с картой, отметкой точек, активным маршрутом, историей и офлайн-снимком.
 Маршрут фиксируется снапшотом на старте — то есть отчёт о прохождении нельзя
 «подкрутить» задним числом, отредактировав маршрут.
 
 <!-- MEDIA:EXECUTION -->
 
 <p align="center">
-  <img src="docs/media/execution-progress.jpg" width="240" alt="Прохождение маршрута с картой и прогрессом" />
+  <img src="docs/media/route-details-current.jpg" width="220" alt="Описание маршрута с картой, остановками и набором высоты" />
+  <img src="docs/media/route-map-current.jpg" width="220" alt="Интерактивная карта участка и всего маршрута" />
+  <img src="docs/media/route-start-current.jpg" width="220" alt="Подтверждение старта маршрута" />
+</p>
+
+<p align="center">
+  <img src="docs/media/route-active-current.jpg" width="220" alt="Активное прохождение и отмеченные остановки" />
+  <img src="docs/media/route-paused-current.jpg" width="220" alt="Пауза и возобновление прохождения" />
+  <img src="docs/media/route-history-current.jpg" width="220" alt="История завершённых и приостановленных прохождений" />
 </p>
 
 ### Профиль и социальное
@@ -75,8 +84,8 @@
 <!-- MEDIA:PROFILE -->
 
 <p align="center">
-  <img src="docs/media/profile-overview.jpg" width="220" alt="Профиль: звание и статистика" />
-  <img src="docs/media/profile-achievements.jpg" width="220" alt="Список достижений" />
+  <img src="docs/media/profile-current.jpg" width="220" alt="Профиль: звание, статистика и достижения" />
+  <img src="docs/media/notifications-current.jpg" width="220" alt="Уведомления о достижении и опубликованном отзыве" />
 </p>
 
 ---
@@ -91,8 +100,8 @@
 расписанием и предупреждениями, чем большой каталог, которому нельзя доверять.
 Источник и свежесть критичных данных видны и проверяемы.
 
-**Офлайн там, где он нужен.** Прохождение маршрута переживает пропажу связи —
-именно в горах, где она пропадает.
+**Данные доступны без связи.** Сохранённый снимок маршрута можно просматривать
+офлайн; пошаговую навигацию с поворотами продукт пока не обещает.
 
 **Сменные провайдеры.** Роутинг, ИИ и геоданные подключены через контракты
 (`RoutingProvider`, `AIPlanningProvider`, `TspProvider`, `DistanceMatrixProvider`),
@@ -106,14 +115,15 @@
 
 ## Как устроено
 
-Git superproject с тремя submodule:
+Git superproject с четырьмя submodule:
 
 ```text
 workspace/
 ├── docs/                 # индекс документации
 ├── tourism-platform/     # docs, Compose, deploy
 ├── tourism-backend/      # FastAPI modular monolith
-└── tourism-mobile/       # Flutter app
+├── tourism-mobile/       # Flutter app
+└── tourism-landing/      # публичный сайт
 ```
 
 | Repository | Назначение |
@@ -121,11 +131,12 @@ workspace/
 | [`tourism-platform`](tourism-platform) | Docs, local Compose, test deploy |
 | [`tourism-backend`](tourism-backend) | Python 3.13 / FastAPI modular monolith |
 | [`tourism-mobile`](tourism-mobile) | Flutter Android / iOS |
+| [`tourism-landing`](tourism-landing) | Публичный сайт и загрузка APK |
 
 **Мобильное:** Flutter, Riverpod, GoRouter, Dio.
 **Бэкенд:** Python 3.13, FastAPI, Pydantic v2, SQLAlchemy 2, Alembic.
 **Данные:** PostgreSQL + PostGIS (+ pgvector), Redis.
-**Инфраструктура:** Docker Compose, Caddy на тестовом контуре.
+**Инфраструктура:** Docker Compose, Caddy.
 **ИИ:** сменный `AIPlanningProvider` — mock / Gemini / LM Studio (Gemma 4 26B).
 
 Модули бэкенда: `identity`, `geography`, `places`, `routes`, `favorites`, `support`,
@@ -140,48 +151,16 @@ workspace/
 
 ## Статус
 
-Рабочий продукт, не скелет. Каталог, авторизация (OTP/JWT), избранное, публикация
-маршрутов, админ-панель, профиль со званиями и лидербордом, отзывы, уведомления
-(inbox + FCM), прохождение маршрута, подбор, ИИ-чат — работают. Тестовый контур
-задеплоен на отдельный хост.
+В коде реализованы каталог, авторизация, статьи и комментарии, публикация
+маршрутов, профиль, отзывы, уведомления, прохождение и история маршрутов,
+подбор и ИИ-чат. Маршруты содержат дни, этапы и оценку сложности. Админка
+включает адаптивные рабочие экраны, дашборд, очереди поддержки и настраиваемые
+права ролей и сотрудников. Публичный сайт ведёт на загрузку опубликованного APK.
 
-В работе: улучшение алгоритмов подбора, статьи/блог, переработка RAG.
-Живой лог: [progress.md](tourism-platform/docs/progress.md).
-
----
-
-## Запуск
-
-```bash
-git clone --recurse-submodules https://gitlab.com/travel-platform2/workspace.git
-cd workspace
-make init
-make up
-```
-
-Для SSH вместо HTTPS:
-
-```bash
-git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
-```
-
-| Команда | Назначение |
-| --- | --- |
-| `make init` | Submodules + platform `.env` |
-| `make up` / `down` / `ps` / `logs` | Локальная инфраструктура |
-| `make validate` | Проверки tourism-platform |
-| `make update` | Обновить submodule pointers |
-| `make clean CONFIRM=yes` | Удалить volumes |
-
-Бэкенд и мобильное — в своих каталогах:
-
-```bash
-cd tourism-backend && uv run tourism-backend      # API
-cd tourism-mobile  && flutter run                 # приложение
-```
-
-Проверки перед коммитом: `cd tourism-backend && ./scripts/validate.sh`,
-`cd tourism-mobile && flutter analyze && flutter test`.
+Оплата Travel+, аудиогид и пошаговая навигация пока не подключены как
+полноценные сценарии. Версия исходного мобильного кода может отличаться от
+опубликованного APK. Подробный срез:
+[текущий статус](tourism-platform/docs/current-status.md).
 
 ---
 
@@ -193,7 +172,7 @@ cd tourism-mobile  && flutter run                 # приложение
 - [Бизнес-логика](tourism-platform/docs/application-business-logic.md)
 - [Доменная модель](tourism-platform/docs/domain-model.md)
 - [Стек](tourism-platform/docs/stack.md)
-- [Progress — что сделано и что дальше](tourism-platform/docs/progress.md)
+- [Текущий статус](tourism-platform/docs/current-status.md)
 - [Архитектурные решения (ADR)](tourism-platform/docs/decisions)
 - [Локальная разработка](tourism-platform/docs/local-development.md)
 - [Соглашения разработки](tourism-platform/docs/development-conventions.md)
