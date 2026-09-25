@@ -10,7 +10,7 @@
 
 <p align="center">
   <img src="docs/media/welcome-current.jpg" width="220" alt="Заставка КРЫМТРИП" />
-  <img src="docs/media/home-current.jpg" width="220" alt="Главный экран с активным маршрутом и подборками" />
+  <img src="docs/media/auth-flow.gif" width="220" alt="Регистрация и вход по номеру телефона" />
 </p>
 
 ---
@@ -28,26 +28,26 @@
 
 ## Что умеет
 
-### Каталог и маршруты
+### Каталог мест и маршрутов
 
-Места с категориями, сезонностью, расписанием, несколькими входами и предупреждениями
-о безопасности. Данные — PostGIS, поэтому «рядом» — это настоящая география,
-а не совпадение по названию. В каталоге маршруты можно искать и фильтровать
-по тематике; карточка показывает транспорт, сложность и длительность.
+В каталоге отдельно собраны маршруты и локации: их можно искать, фильтровать
+и добавлять в избранное. Карточки маршрутов показывают транспорт, сложность,
+расстояние и оценку; карточки локаций — название, категорию и фотографию.
 
 <!-- MEDIA:CATALOG -->
 
 <p align="center">
-  <img src="docs/media/routes-catalog-current.jpg" width="220" alt="Каталог маршрутов с фильтрами и карточкой" />
+  <img src="docs/media/routes-list-current.jpg" width="220" alt="Каталог маршрутов с поиском и карточками" />
+  <img src="docs/media/locations-catalog-current.jpg" width="220" alt="Каталог локаций с поиском и карточками" />
 </p>
 
 ### Три способа получить маршрут
 
 | Способ | Как работает | Кому |
 | --- | --- | --- |
-| **Готовые маршруты** | Редакционные и пользовательские, прошедшие модерацию | Хочу быстро |
-| **Подбор по параметрам** | Форма: город, время, интересы, темп, транспорт → детерминированный скоринг каталога | Знаю, чего хочу |
-| **Тревел Агент (ИИ)** | Диалог на русском, уточняющие вопросы, генерация маршрута под ответы | Не знаю, с чего начать |
+| **Готовые маршруты** | Просмотр каталога и фильтры по теме | Хочу выбрать сам |
+| **Подбор по параметрам** | Город, тип поездки, длительность, состав группы и интересы | Знаю, чего хочу |
+| **Тревел Агент (ИИ)** | Диалог на русском: варианты маршрутов и уточнение пожеланий | Хочу обсудить поездку |
 
 <!-- MEDIA:MATCH -->
 
@@ -58,34 +58,28 @@
 
 ### Прохождение маршрута
 
-Прохождение с картой, отметкой точек, активным маршрутом, историей и офлайн-снимком.
-Маршрут фиксируется снапшотом на старте — то есть отчёт о прохождении нельзя
-«подкрутить» задним числом, отредактировав маршрут.
+Во время прогулки видны линия маршрута, пройденные остановки и следующий
+участок. Прохождение можно поставить на паузу или завершить; в истории
+сохраняются завершённые и приостановленные маршруты.
 
 <!-- MEDIA:EXECUTION -->
 
 <p align="center">
-  <img src="docs/media/route-details-current.jpg" width="220" alt="Описание маршрута с картой, остановками и набором высоты" />
-  <img src="docs/media/route-map-current.jpg" width="220" alt="Интерактивная карта участка и всего маршрута" />
-  <img src="docs/media/route-start-current.jpg" width="220" alt="Подтверждение старта маршрута" />
-</p>
-
-<p align="center">
   <img src="docs/media/route-active-current.jpg" width="220" alt="Активное прохождение и отмеченные остановки" />
-  <img src="docs/media/route-paused-current.jpg" width="220" alt="Пауза и возобновление прохождения" />
-  <img src="docs/media/route-history-current.jpg" width="220" alt="История завершённых и приостановленных прохождений" />
+  <img src="docs/media/route-history-current.jpg" width="220" alt="История завершённых и приостановленных маршрутов" />
 </p>
 
 ### Профиль и социальное
 
-Звания за пройденные маршруты, достижения, статистика, лидерборд, отзывы с фото,
-избранное, публикация своих маршрутов с модерацией.
+Профиль показывает звание и статистику поездок. На отдельном экране достижений
+виден прогресс по каждой цели и уже полученные награды. Также доступны
+избранное, отзывы, рейтинг путешественников и публикация своих маршрутов.
 
 <!-- MEDIA:PROFILE -->
 
 <p align="center">
   <img src="docs/media/profile-current.jpg" width="220" alt="Профиль: звание, статистика и достижения" />
-  <img src="docs/media/notifications-current.jpg" width="220" alt="Уведомления о достижении и опубликованном отзыве" />
+  <img src="docs/media/achievements-current.jpg" width="220" alt="Полученные достижения и прогресс по остальным" />
 </p>
 
 ---
@@ -128,10 +122,10 @@ workspace/
 
 | Repository | Назначение |
 | --- | --- |
-| [`tourism-platform`](tourism-platform) | Docs, local Compose, test deploy |
-| [`tourism-backend`](tourism-backend) | Python 3.13 / FastAPI modular monolith |
-| [`tourism-mobile`](tourism-mobile) | Flutter Android / iOS |
-| [`tourism-landing`](tourism-landing) | Публичный сайт и загрузка APK |
+| [`tourism-platform`](https://github.com/xotabeach/tourism-platform) | Docs, local Compose, test deploy |
+| [`tourism-backend`](https://github.com/xotabeach/tourism-backend) | Python 3.13 / FastAPI modular monolith |
+| [`tourism-mobile`](https://github.com/xotabeach/tourism-mobile) | Flutter Android / iOS |
+| [`tourism-landing`](https://github.com/xotabeach/tourism-landing) | Публичный сайт и загрузка APK |
 
 **Мобильное:** Flutter, Riverpod, GoRouter, Dio.
 **Бэкенд:** Python 3.13, FastAPI, Pydantic v2, SQLAlchemy 2, Alembic.
@@ -143,9 +137,9 @@ workspace/
 `notifications`, `admin`, `media`, `route_builder`, `route_execution`, `subscriptions`,
 `recommendations`, `knowledge`, `content`, `runtime_config`.
 
-Подробнее: [стек](tourism-platform/docs/stack.md) ·
-[доменная модель](tourism-platform/docs/domain-model.md) ·
-[архитектурные решения](tourism-platform/docs/decisions)
+Подробнее: [стек](https://github.com/xotabeach/tourism-platform/blob/main/docs/stack.md) ·
+[доменная модель](https://github.com/xotabeach/tourism-platform/blob/main/docs/domain-model.md) ·
+[архитектурные решения](https://github.com/xotabeach/tourism-platform/blob/main/docs/decisions)
 
 ---
 
@@ -160,7 +154,7 @@ workspace/
 Оплата Travel+, аудиогид и пошаговая навигация пока не подключены как
 полноценные сценарии. Версия исходного мобильного кода может отличаться от
 опубликованного APK. Подробный срез:
-[текущий статус](tourism-platform/docs/current-status.md).
+[текущий статус](https://github.com/xotabeach/tourism-platform/blob/main/docs/current-status.md).
 
 ---
 
@@ -168,14 +162,14 @@ workspace/
 
 Канон — в `tourism-platform/docs/`. Индекс: [docs/README.md](docs/README.md).
 
-- [Видение продукта](tourism-platform/docs/product-vision.md)
-- [Бизнес-логика](tourism-platform/docs/application-business-logic.md)
-- [Доменная модель](tourism-platform/docs/domain-model.md)
-- [Стек](tourism-platform/docs/stack.md)
-- [Текущий статус](tourism-platform/docs/current-status.md)
-- [Архитектурные решения (ADR)](tourism-platform/docs/decisions)
-- [Локальная разработка](tourism-platform/docs/local-development.md)
-- [Соглашения разработки](tourism-platform/docs/development-conventions.md)
+- [Видение продукта](https://github.com/xotabeach/tourism-platform/blob/main/docs/product-vision.md)
+- [Бизнес-логика](https://github.com/xotabeach/tourism-platform/blob/main/docs/application-business-logic.md)
+- [Доменная модель](https://github.com/xotabeach/tourism-platform/blob/main/docs/domain-model.md)
+- [Стек](https://github.com/xotabeach/tourism-platform/blob/main/docs/stack.md)
+- [Текущий статус](https://github.com/xotabeach/tourism-platform/blob/main/docs/current-status.md)
+- [Архитектурные решения (ADR)](https://github.com/xotabeach/tourism-platform/blob/main/docs/decisions)
+- [Локальная разработка](https://github.com/xotabeach/tourism-platform/blob/main/docs/local-development.md)
+- [Соглашения разработки](https://github.com/xotabeach/tourism-platform/blob/main/docs/development-conventions.md)
 
 ---
 
